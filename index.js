@@ -15,9 +15,9 @@ require('./assets/scripts/app.js')
 // styles
 require('./assets/styles/index.scss')
 
-require('.assets/scripts/')
-
-
+require('./assets/scripts/game/api.js')
+require('./assets/scripts/game/events.js')
+require('./assets/scripts/game/ui.js')
 
 let xo = 'X'
 // const isEmptyString = function (cell) {
@@ -49,9 +49,9 @@ let xo = 'X'
 
 const clickCell = function (event) {
   // console.log('clickCell called, ' + which())
-  let xo = response.cells.filter(cell => cell === "").length % 2 === 1 ? 'X' : 'O'
+  xo = response.cells.filter(cell => cell === '').length % 2 === 1 ? 'X' : 'O'
   // get position in board 0-8
-const position = event.target.id
+  const position = event.target.id
 
   // if cell is empty
   if (!$(event.target).text()) {
