@@ -50,10 +50,52 @@ const comments = {
   // }
 }
 
+
+const winCheck = function (board) {
+  // enumerate the win conditions
+  const wins = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+  ]
+  let boolean = false
+  let i = 0
+  // check all the win conditions to see if any has been met
+  while (!boolean && i < wins.length) {
+    boolean =
+    board[wins[i][0]] === xo &&
+    board[wins[i][1]] === xo &&
+    board[wins[i][2]] === xo
+    i++
+  }
+  return boolean
+}
+
+const drawCheck = function (board) {
+  return !board.includes('')
+}
+
+const isOver = function (board) {
+  if (winCheck(board)) {
+    return true
+  } else if (drawCheck(board)) {
+    return true
+  } else {
+    return false
+  }
+}
+
+$(() => {
+  $('div.box').on('click', clickCell)
+})
+
 const clickCell = function (event) {
-  // console.log('clickCell called, ' + which())
   xo = response.cells.filter(cell => cell === '').length % 2 === 1 ? 'X' : 'O'
-  // if cell is empty
   if (!$(event.target).text()) {
     // get position in board 0-8
     position = event.target.id
@@ -62,17 +104,12 @@ const clickCell = function (event) {
     // turnSwitch()
     // update API
     gameEvents.onUpdateGame(event)
+    // check if the game is over
+    if (isOver(response.cells)) {
+
+    }
   }
 }
-
-let response =
-const isOver = function (response) {
-  response.cells
-}
-
-$(() => {
-  $('div.box').on('click', clickCell)
-})
 
 module.exports = {
   xo,
