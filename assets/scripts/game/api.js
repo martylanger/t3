@@ -24,13 +24,13 @@
 //   })
 // }
 //
-// const update = function (formData) {
-//   return $.ajax({
-//     url: config.apiUrl + '/books/' + formData.book.id,
-//     method: 'PATCH',
-//     data: formData
-//   })
-// }
+const update = function (thisGame) {
+  return $.ajax({
+    url: config.apiUrl + '/games/:' + thisGame.game.id,
+    method: 'PATCH',
+    data: thisGame
+  })
+}
 //
 // const create = function (formData) {
 //   return $.ajax({

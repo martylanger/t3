@@ -1,5 +1,7 @@
-// 'use strict'
-//
+'use strict'
+
+const index = require('../../../index.js')
+
 // const onIndexSuccess = function (responseData) {
 //   // log the information we get back from the API so we know how we can
 //   // interact with it.
@@ -66,14 +68,15 @@
 //   $('form').trigger('reset')
 // }
 //
-// const onUpdateSuccess = function (responseData) {
-//   // add success message to our update-book-message element
-//   $('#update-book-message').html('You successfully updated the book')
-//
-//   // empty out the book-display element in case it was displaying information
-//   // about the book we just updated, replace with a message for the user to get
-//   // all the books again.
-//   $('#book-display').html('Books have changed! Click "Get All Books" again to see all the books.')
+const onUpdateSuccess = function (responseData) {
+  // add success message to our update-book-message element
+  $('#message').html('You successfully updated the game')
+  if (index.isOver(responseData)) {
+    // someone wins!
+  } else {
+    // it's someone's turn
+    $('#message2').html(`It's ${index.xo}'s turn'`)
+  }
 //
 //   // add class for success messaging
 //   $('#update-book-message').addClass('success')
@@ -87,7 +90,7 @@
 //
 //   // reset all forms
 //   $('form').trigger('reset')
-// }
+}
 //
 // const onCreateSuccess = function () {
 //   // add success message to content
@@ -139,11 +142,11 @@
 //   $('form').trigger('reset')
 // }
 //
-// module.exports = {
+module.exports = {
 //   onIndexSuccess,
 //   onShowSuccess,
 //   onDestroySuccess,
-//   onUpdateSuccess,
+  onUpdateSuccess
 //   onCreateSuccess,
 //   onError
-// }
+}

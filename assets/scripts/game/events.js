@@ -1,8 +1,8 @@
-// 'use strict'
-//
-// const api = require('./api.js')
-// const ui = require('./ui.js')
-// const getFormFields = require('../../../lib/get-form-fields.js')
+'use strict'
+
+const api = require('./api.js')
+const ui = require('./ui.js')
+const index = require('../../../index.js')
 //
 // const onGetBooks = function () {
 //   // make API call to get all of the books
@@ -26,7 +26,7 @@
 //   api.show(formData)
 //
 //     // if the API call is successful then pass the data to the onShowSuccess
-//     // function
+//     // functiongame
 //     .then(ui.onShowSuccess)
 //
 //     // if the API call fails then run our onError function
@@ -50,23 +50,30 @@
 //     .catch(ui.onError)
 // }
 //
-// const onUpdateBook = function (event) {
+const onUpdateGame = function (event) {
 //   // prevent default submit action to stop the page from refreshing
-//   event.preventDefault()
-//
-//   // create a javascript object from the form where the user entered the book
-//   // information
-//   const formData = getFormFields(event.target)
-//
-//   // make API call to update one book with the data we grabbed from the form
-//   api.update(formData)
-//
-//     // if the API call is successful then invoke the onUpdateSuccess function
-//     .then(ui.onUpdateSuccess)
+  event.preventDefault()
+
+  // create a javascript object from clickCell info
+  const thisGame =
+  {
+    "game": {
+      "cell": {
+        "index": index.position,
+        "value": index.xo
+      },
+      "over": index.isOver
+    }
+  }
+  // make API call to update one book with the data we grabbed from the form
+  api.update(thisGame)
+
+    // if the API call is successful then invoke the onUpdateSuccess function
+    .then(ui.onUpdateSuccess)
 //
 //     // if the API call fails then run our onError function
-//     .catch(ui.onError)
-// }
+    .catch(ui.onError)
+}
 //
 // const onCreateBook = function (event) {
 //   // prevent default submit action to stop the page from refreshing
@@ -86,10 +93,10 @@
 //     .catch(ui.onError)
 // }
 //
-// module.exports = {
+module.exports = {
 //   onGetBooks,
 //   onGetBook,
 //   onDeleteBook,
-//   onUpdateBook,
+  onUpdateGame
 //   onCreateBook
-// }
+}
