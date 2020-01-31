@@ -1,6 +1,6 @@
 'use strict'
 
-const index = require('../../../index.js')
+const index = require('./../../../index.js')
 
 // const onIndexSuccess = function (responseData) {
 //   // log the information we get back from the API so we know how we can
@@ -75,7 +75,7 @@ const onUpdateSuccess = function (responseData) {
     // someone wins!
   } else {
     // it's someone's turn
-    $('#message2').html(`It's ${index.xo}'s turn'`)
+    $('#message2').html(`It's ${index.xo}'s turn`)
   }
 //
 //   // add class for success messaging

@@ -62,10 +62,10 @@ const onUpdateGame = function (event) {
         "index": index.position,
         "value": index.xo
       },
-      "over": index.isOver
+      "over": index.isOver(response.cells)
     }
   }
-  // make API call to update one book with the data we grabbed from the form
+  // make API call to update the game
   api.update(thisGame)
 
     // if the API call is successful then invoke the onUpdateSuccess function

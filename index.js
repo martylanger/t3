@@ -90,9 +90,6 @@ const isOver = function (board) {
   }
 }
 
-$(() => {
-  $('div.box').on('click', clickCell)
-})
 
 const clickCell = function (event) {
   xo = response.cells.filter(cell => cell === '').length % 2 === 1 ? 'X' : 'O'
