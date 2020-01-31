@@ -1,6 +1,7 @@
 'use strict'
 
 const config = require('./../config')
+const store = require('./../store')
 
 // const index = function () {
 //   // make GET request to /books
@@ -26,7 +27,7 @@ const config = require('./../config')
 //
 const update = function (thisGame) {
   return $.ajax({
-    url: config.apiUrl + '/games/:' + (()).game.id,
+    url: config.apiUrl + '/games/:' + store.game.id,
     method: 'PATCH',
     data: thisGame
   })

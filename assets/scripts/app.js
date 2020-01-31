@@ -8,15 +8,15 @@
 
 // require my gameEvents file to gain access to all the event listeners
 const gameEvents = require('./game/events')
+const authEvents = require('./auth/events')
 const index = require('./../../index.js')
 
 $(() => {
-  // mount all of our event handlers to the correct DOM elements when the page
-  // has finished loading
+  $('#sign-up').on('submit', authEvents.onSignUp)
+  $('#sign-up').on('submit', console.log('submit clicked'))
+  $('#sign-in').on('submit', authEvents.onSignIn)
+  $('#sign-out').on('submit', authEvents.onSignOut)
+  $('#change-password').on('submit', authEvents.onChangePassword)
   $('div.box').on('click', index.clickCell)
-//   $('#books-index').on('click', bookEvents.onGetBooks)
-//   $('#books-show').on('submit', bookEvents.onGetBook)
-//   $('#books-delete').on('submit', bookEvents.onDeleteBook)
   $('div.box').on('click', gameEvents.onUpdateGame)
-//   $('#books-create').on('submit', bookEvents.onCreateBook)
 })

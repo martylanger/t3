@@ -1,7 +1,7 @@
 'use strict'
 
 const index = require('./../../../index.js')
-
+const store = require('./../store.js')
 // const onIndexSuccess = function (responseData) {
 //   // log the information we get back from the API so we know how we can
 //   // interact with it.
@@ -71,6 +71,7 @@ const index = require('./../../../index.js')
 const onUpdateSuccess = function (responseData) {
   // add success message to our update-book-message element
   $('#message').html('You successfully updated the game')
+  store.game = responseData.game // or is it just responseData?
   if (index.isOver(responseData)) {
     // someone wins!
   } else {
@@ -92,35 +93,13 @@ const onUpdateSuccess = function (responseData) {
 //   $('form').trigger('reset')
 }
 //
-// const onCreateSuccess = function () {
-//   // add success message to content
-//   $('#create-book-message').html('You created a new book!')
-//
-//   // check if the book-display element is NOT just an empty string
-//   if (!($('#book-display').html() === '')) {
-//     // if the element is NOT empty it is probably displaying the book
-//     // information, but we just created a new book!
-//     // we can add a message to let the users know they should request all of
-//     // the books again to see the newly created book included
-//     $('#book-display').html('Books have changed! Click "Get All Books" again to see all the books.')
-//   }
-//   // $('#book-display').html('')
-//
-//   // add class for success messaging
-//   $('#create-book-message').addClass('success')
-//
-//   // use setTimeout to allow the success message to stay for 5 seconds before
-//   // the message is replaced with '' and the 'success' class is removed
-//   setTimeout(() => {
-//     $('#create-book-message').html('')
-//     $('#create-book-message').removeClass('success')
-//   }, 5000)
-//
-//   // reset all forms
-//   $('form').trigger('reset')
-// }
-//
-// const onError = function (err) {
+const onCreateSuccess = function (responseData) {
+  // add success message to content
+  $('#message').html('You created a new game!')
+  store.game = responseData.game // or is it just responseData?
+}
+
+{// const onError = function (err) {
 //   // log the error for debugging purposes
 //   console.error(err)
 //
@@ -137,16 +116,13 @@ const onUpdateSuccess = function (responseData) {
 //     $('#error-message').html('')
 //     $('#error-message').removeClass('failure')
 //   }, 5000)
-//
-//   // reset all forms
-//   $('form').trigger('reset')
-// }
-//
+}
+
 module.exports = {
 //   onIndexSuccess,
 //   onShowSuccess,
 //   onDestroySuccess,
-  onUpdateSuccess
-//   onCreateSuccess,
+  onUpdateSuccess,
+  onCreateSuccess
 //   onError
 }
