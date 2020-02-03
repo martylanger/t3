@@ -139,7 +139,7 @@ const clickCell = function (event) {
   // whose turn is it?
   xo = store.game.cells.filter(cell => cell === '').length % 2 === 1 ? 'X' : 'O'
   // if user clicked an empty cell:
-  if (!$(event.target).text()) {
+  if (!$(event.target).text() && !store.game.over) {
     // get position of click 0-8
     position = event.target.id
     // insert xo into the chosen cell
