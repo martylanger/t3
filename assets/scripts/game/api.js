@@ -30,8 +30,8 @@ const vestigial = {
 
 const update = function (thisGame) {
   console.log('running update')
-  console.log(store.game.id)
-  console.log(config.apiUrl + '/games/' + store.game.id)
+  // console.log(store.game.id)
+  // console.log(config.apiUrl + '/games/' + store.game.id)
   return $.ajax({
     url: config.apiUrl + '/games/' + store.game.id,
     method: 'PATCH',

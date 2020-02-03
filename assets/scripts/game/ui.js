@@ -1,7 +1,10 @@
 'use strict'
 
-const index = require('./t3.js')
+// const t3 = require('./t3.js')
+const events = require('./events.js')
 const store = require('./../store.js')
+
+const vestigials = {
 // const onIndexSuccess = function (responseData) {
 //   // log the information we get back from the API so we know how we can
 //   // interact with it.
@@ -68,36 +71,22 @@ const store = require('./../store.js')
 //   $('form').trigger('reset')
 // }
 //
+}
+
 const onUpdateSuccess = function (responseData) {
+  console.log('running onUpdateSuccess')
   // add success message to our update-book-message element
   $('#message').html('You successfully updated the game')
-  store.game = responseData.game // or is it just responseData?
-  if (index.isOver(responseData)) {
-    // someone wins!
-  } else {
-    // it's someone's turn
-    $('#message2').html(`It's ${index.xo}'s turn`)
+  if (!responseData.game.over) {
+    store.game = responseData.game
+    $('#message2').html(`It's ${events.xo}'s turn`)
   }
-//
-//   // add class for success messaging
-//   $('#update-book-message').addClass('success')
-//
-//   // use setTimeout to allow the success message to stay for 5 seconds before
-//   // the message is replaced with '' and the 'success' class is removed
-//   setTimeout(() => {
-//     $('#update-book-message').html('')
-//     $('#update-book-message').removeClass('success')
-//   }, 5000)
-//
-//   // reset all forms
-//   $('form').trigger('reset')
 }
 //
 const onCreateSuccess = function (responseData) {
-  // add success message to content
+  console.log('running onCreateSuccess')
   $('#message').html('You created a new game!')
-  store.game = responseData.game // or is it just responseData?
-  console.log(responseData.game)
+  store.game = responseData.game
   console.log(store.game)
 }
 

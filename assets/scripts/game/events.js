@@ -93,6 +93,7 @@ const comments2 = {
 }
 
 const winCheck = function (board) {
+  console.log('running winCheck')
   // enumerate the win conditions
   const wins = [
     [0, 1, 2],
@@ -118,10 +119,12 @@ const winCheck = function (board) {
 }
 
 const drawCheck = function (board) {
+  console.log('running drawCheck')
   return !board.includes('')
 }
 
 const isOver = function (board) {
+  console.log('running isOver')
   if (winCheck(board)) {
     return true
   } else if (drawCheck(board)) {
@@ -132,22 +135,27 @@ const isOver = function (board) {
 }
 
 const clickCell = function (event) {
-  console.log('clickCell running')
+  console.log('running clickCell')
+  // whose turn is it?
   xo = store.game.cells.filter(cell => cell === '').length % 2 === 1 ? 'X' : 'O'
-  console.log('xo = ' + xo)
-  console.log($(event.target))
+  // if user clicked an empty cell:
   if (!$(event.target).text()) {
-    // get position in board 0-8
+    // get position of click 0-8
     position = event.target.id
-    console.log('position = ' + position)
-    // insert xo
+    // insert xo into the chosen cell
     $(event.target).text(xo)
-    // turnSwitch()
-    // update API
+    // update game state locally
+    store.game.cells[position] = xo
+    // check if the game is over
+    if (isOver(store.game.cells)) {
+      $('#message2').text('Game over. ' + xo + ' wins!')
+      store.game.over = true
+      // update the api
+
+    }
     // gameEvents.onUpdateGame(event)
     // check if the game is over
     // if (isOver(response.cells)) {
-    //   $('#message2').text('Game over')
     // }
   }
 }
@@ -155,23 +163,18 @@ const clickCell = function (event) {
 const onUpdateGame = function (event) {
   // prevent default submit action to stop the page from refreshingCreate
   event.preventDefault()
-  console.log('onUpdateGame running')
-  console.log(event)
-  console.log(xo)
-  console.log(clickCell)
+  console.log('running onUpdateGame')
   clickCell(event)
-  console.log(position)
   // create a javascript object from clickCell info
   const thisGame = {
     "game": {
       "cell": {
         "index": position,
         "value": xo
-      }
+      },
+      "over": store.game.over
     }
   }
-  console.log(thisGame)
-  // "over": index.isOver(store.game.cells)
   // make API call to update the game
   api.update(thisGame)
 
@@ -184,6 +187,7 @@ const onUpdateGame = function (event) {
 
 const onCreateGame = function (event) {
   event.preventDefault()
+  console.log('running onCreateGame')
   api.create()
     .then(ui.onCreateSuccess)
     .catch(ui.onCreateFailure)
@@ -209,5 +213,7 @@ const onCreateGame = function (event) {
 //
 module.exports = {
   onUpdateGame,
-  onCreateGame
+  onCreateGame,
+  xo,
+  isOver
 }
