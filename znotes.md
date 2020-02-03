@@ -4,3 +4,7 @@ board is an array of strings
 
 
 config.js - done ?
+
+click -> app.js
+app.js -> gameEvents.onUpdateGame
+gameEvents.onUpdateGame -> index.clickCell

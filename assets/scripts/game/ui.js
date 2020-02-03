@@ -1,6 +1,6 @@
 'use strict'
 
-const index = require('./../../../index.js')
+const index = require('./t3.js')
 const store = require('./../store.js')
 // const onIndexSuccess = function (responseData) {
 //   // log the information we get back from the API so we know how we can
@@ -97,8 +97,13 @@ const onCreateSuccess = function (responseData) {
   // add success message to content
   $('#message').html('You created a new game!')
   store.game = responseData.game // or is it just responseData?
+  console.log(responseData.game)
+  console.log(store.game)
 }
 
+const onCreateFailure = function (responseData) {
+  $('#message').html('You failed to create a game')
+}
 {// const onError = function (err) {
 //   // log the error for debugging purposes
 //   console.error(err)
@@ -123,6 +128,7 @@ module.exports = {
 //   onShowSuccess,
 //   onDestroySuccess,
   onUpdateSuccess,
-  onCreateSuccess
+  onCreateSuccess,
+  onCreateFailure
 //   onError
 }
