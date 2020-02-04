@@ -82,7 +82,7 @@ const onUpdateSuccess = function (responseData) {
     $('#message2').html(`It's ${store.game.cells.filter(cell => cell === '').length % 2 === 1 ? 'X' : 'O'}'s turn`)
   }
 }
-//
+
 const onCreateSuccess = function (responseData) {
   console.log('running onCreateSuccess')
   $('#message').html('You created a new game!')
@@ -90,8 +90,22 @@ const onCreateSuccess = function (responseData) {
 }
 
 const onCreateFailure = function (responseData) {
+  console.log('running onCreateFailure')
   $('#message').html('You failed to create a game')
 }
+
+const onNewGameSuccess = function (responseData) {
+  console.log('running onNewGameSuccess')
+  $('#message').html('You started a new game!')
+  store.game = responseData.game
+  $('div.box').text('')
+}
+
+const onNewGameFailure = function (responseData) {
+  console.log('running onNewGameFailure')
+  $('#message').html('You failed to start a new game')
+}
+
 {// const onError = function (err) {
 //   // log the error for debugging purposes
 //   console.error(err)
@@ -117,6 +131,8 @@ module.exports = {
 //   onDestroySuccess,
   onUpdateSuccess,
   onCreateSuccess,
-  onCreateFailure
+  onCreateFailure,
+  onNewGameSuccess,
+  onNewGameFailure
 //   onError
 }

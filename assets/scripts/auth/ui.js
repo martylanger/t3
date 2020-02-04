@@ -30,6 +30,12 @@ const signInSuccess = function (data) {
     .catch(getStatsFailure)
 }
 
+const signInFailure = function (error) {
+  $('#message3').text('Error on sign up')
+  $('form').trigger('reset')
+  console.error('signInFailure ran. Error is :', error)
+}
+
 const whoWon = function (game) {
   const user = store.user.id
   let winner = 1
@@ -84,12 +90,6 @@ const getStatsSuccess = function (data) {
 const getStatsFailure = function (error) {
   $('#message3').text('Error on get stats')
   console.error('running getStatsFailure. Error is :', error)
-}
-
-const signInFailure = function (error) {
-  $('#message3').text('Error on sign in')
-  $('form').trigger('reset')
-  console.error('signInFailure ran. Error is :', error)
 }
 
 const signOutSuccess = function () {

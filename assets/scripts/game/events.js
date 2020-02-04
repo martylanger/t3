@@ -124,9 +124,15 @@ const onUpdateGame = function (event) {
 const onCreateGame = function (event) {
   event.preventDefault()
   console.log('running onCreateGame')
-  api.create()
-    .then(ui.onCreateSuccess)
-    .catch(ui.onCreateFailure)
+  if (store.game) {
+    api.create()
+      .then(ui.onNewGameSuccess)
+      .catch(ui.onNewGameFailure)
+  } else {
+    api.create()
+      .then(ui.onCreateSuccess)
+      .catch(ui.onCreateFailure)
+  }
 }
 
 module.exports = {
