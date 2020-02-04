@@ -91,7 +91,11 @@ const clickCell = function (event) {
     store.game.cells[position] = xo
     // check if the game is over
     if (isOver(store.game.cells)) {
-      $('#message2').text('Game over. ' + xo + ' wins!')
+      if (drawCheck(store.game.cells)) {
+        $('#message2').text('Game over. Nobody wins!')
+      } else {
+        $('#message2').text('Game over. ' + xo + ' wins!')
+      }
       store.game.over = true
     }
   }

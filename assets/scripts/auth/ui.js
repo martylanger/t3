@@ -27,7 +27,7 @@ const signInSuccess = function (data) {
 
   api.getStats(data)
     .then(getStatsSuccess)
-    // .catch(getStatsFailure)
+    .catch(getStatsFailure)
 }
 
 const whoWon = function (game) {
@@ -44,7 +44,7 @@ const whoWon = function (game) {
 
   if (winner === 1) {
     outcome = gameEvents.drawCheck(game.cells) ? 'draw' : 'unfinished'
-  } else if (winner === user) {
+  } else if (winner === player) {
     outcome = 'win'
   }
   return outcome
@@ -56,7 +56,6 @@ const getStatsSuccess = function (data) {
   let lossCount = 0
   let drawCount = 0
   let unfinishedCount = 0
-
   for (let i = 0; i < data.games.length; i++) {
     const game = data.games[i]
     switch (whoWon(game)) {
@@ -73,6 +72,7 @@ const getStatsSuccess = function (data) {
         unfinishedCount++
     }
   }
+
   $('#stats').text(
     `Games: ${numGames}
     Wins: ${winCount}
@@ -83,7 +83,7 @@ const getStatsSuccess = function (data) {
 
 const getStatsFailure = function (error) {
   $('#message3').text('Error on get stats')
-  console.error('getStatsFailure ran. Error is :', error)
+  console.error('running getStatsFailure. Error is :', error)
 }
 
 const signInFailure = function (error) {
@@ -123,5 +123,6 @@ module.exports = {
   signOutFailure,
   changePasswordSuccess,
   changePasswordFailure,
-  getStatsSuccess
+  getStatsSuccess,
+  getStatsFailure
 }
