@@ -23,6 +23,10 @@ const onSignIn = function (event) {
   api.signIn(data)
     .then(ui.signInSuccess)
     .catch(ui.signInFailure)
+
+  // api.getStats(data)
+  //   .then(ui.getStatsSuccess)
+  //   .catch(ui.getStatsFailure)
 }
 
 const onSignOut = function (event) {

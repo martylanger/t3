@@ -79,7 +79,7 @@ const onUpdateSuccess = function (responseData) {
   $('#message').html('You successfully updated the game')
   if (!responseData.game.over) {
     store.game = responseData.game
-    $('#message2').html(`It's ${events.xo}'s turn`)
+    $('#message2').html(`It's ${store.game.cells.filter(cell => cell === '').length % 2 === 1 ? 'X' : 'O'}'s turn`)
   }
 }
 //
@@ -87,7 +87,6 @@ const onCreateSuccess = function (responseData) {
   console.log('running onCreateSuccess')
   $('#message').html('You created a new game!')
   store.game = responseData.game
-  console.log(store.game)
 }
 
 const onCreateFailure = function (responseData) {
