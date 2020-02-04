@@ -53,15 +53,7 @@ const create = function () {
     data: {}
   })
 }
-//
-// const create = function (formData) {
-//   return $.ajax({
-//     url: config.apiUrl + '/books',
-//     method: 'POST',
-//     data: formData
-//   })
-// }
-//
+
 module.exports = {
   update,
   create

@@ -17,6 +17,11 @@ signup after signIn
 
 
 
+game ends - gameEvents.clickCell
+          - authApi.getStats(data)
+          - authUi.signInSuccess(data)
+          - authUi.getStatsSuccess
+
 
 config.js - done ?
 

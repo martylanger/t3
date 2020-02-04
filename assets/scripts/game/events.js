@@ -2,6 +2,7 @@
 
 const api = require('./api.js')
 const ui = require('./ui.js')
+const authApi = require('./../auth/api.js')
 // const index = require('./../../../index.js')
 // const t3 = require('./t3.js')
 const store = require('./../store')
@@ -91,12 +92,31 @@ const clickCell = function (event) {
     store.game.cells[position] = xo
     // check if the game is over
     if (isOver(store.game.cells)) {
-      if (drawCheck(store.game.cells)) {
-        $('#message2').text('Game over. Nobody wins!')
-      } else {
-        $('#message2').text('Game over. ' + xo + ' wins!')
-      }
+      // if it's over, set the local game.over value to true
       store.game.over = true
+      // update the stats totals and display game over message
+      store.stats.numGames++
+      if (drawCheck(store.game.cells)) {
+        $('#notice').text('Game over. Nobody wins!')
+        store.stats.drawCount++
+      } else {
+        $('#notice').text('Game over. ' + xo + ' wins!')
+        const player = store.user.id === store.game.player_x.id ? 'X' : 'O'
+        if (player === xo) {
+          store.stats.winCount++
+        } else {
+          store.stats.lossCount++
+        }
+      }
+      // return phase2 features to the ui with updated stats
+      $('#stats').text(
+        `Games: ${store.stats.numGames}
+        Wins: ${store.stats.winCount}
+        Losses: ${store.stats.lossCount}
+        Draws: ${store.stats.drawCount}
+        Unfinished: ${store.stats.unfinishedCount}`)
+      $('#auth-notice').text('')
+      $('.phase2').show()
     }
   }
 }
@@ -124,15 +144,9 @@ const onUpdateGame = function (event) {
 const onCreateGame = function (event) {
   event.preventDefault()
   console.log('running onCreateGame')
-  if (store.game) {
-    api.create()
-      .then(ui.onNewGameSuccess)
-      .catch(ui.onNewGameFailure)
-  } else {
-    api.create()
-      .then(ui.onCreateSuccess)
-      .catch(ui.onCreateFailure)
-  }
+  api.create()
+    .then(ui.onCreateSuccess)
+    .catch(ui.onCreateFailure)
 }
 
 module.exports = {

@@ -97,7 +97,7 @@
 //     // gameEvents.onUpdateGame(event)
 //     // check if the game is over
 //     if (isOver(response.cells)) {
-//       $('#message2').text('Game over')
+//       $('#notice').text('Game over')
 //     }
 //   }
 // }

@@ -75,35 +75,25 @@ const vestigials = {
 
 const onUpdateSuccess = function (responseData) {
   console.log('running onUpdateSuccess')
-  // add success message to our update-book-message element
-  $('#message').html('You successfully updated the game')
   if (!responseData.game.over) {
     store.game = responseData.game
-    $('#message2').html(`It's ${store.game.cells.filter(cell => cell === '').length % 2 === 1 ? 'X' : 'O'}'s turn`)
+    $('#notice').html(`It's ${store.game.cells.filter(cell => cell === '').length % 2 === 1 ? 'X' : 'O'}'s turn`)
   }
 }
 
 const onCreateSuccess = function (responseData) {
   console.log('running onCreateSuccess')
-  $('#message').html('You created a new game!')
   store.game = responseData.game
+  $('#notice').html(`It's ${store.game.cells.filter(cell => cell === '').length % 2 === 1 ? 'X' : 'O'}'s turn`)
+  $('#auth-notice').html('You started a new game!')
+  $('.phase2').hide()
+  $('.phase3').show()
+  $('div.box').text('')
 }
 
 const onCreateFailure = function (responseData) {
   console.log('running onCreateFailure')
-  $('#message').html('You failed to create a game')
-}
-
-const onNewGameSuccess = function (responseData) {
-  console.log('running onNewGameSuccess')
-  $('#message').html('You started a new game!')
-  store.game = responseData.game
-  $('div.box').text('')
-}
-
-const onNewGameFailure = function (responseData) {
-  console.log('running onNewGameFailure')
-  $('#message').html('You failed to start a new game')
+  $('#auth-notice').html('You failed to create a game')
 }
 
 {// const onError = function (err) {
@@ -131,8 +121,6 @@ module.exports = {
 //   onDestroySuccess,
   onUpdateSuccess,
   onCreateSuccess,
-  onCreateFailure,
-  onNewGameSuccess,
-  onNewGameFailure
+  onCreateFailure
 //   onError
 }
