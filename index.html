@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>t3</title>
+    <title>T3</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Do not add `link` tags-->
@@ -11,12 +11,7 @@
     <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
   </head>
   <body>
-    <h1>t3</h1>
-    <div class='container text-center phase2'> <!-- Text-center is superfluous right now-->
-      <div class='row'>
-        <div id='stats' class='col-12 box'></div>
-      </div>
-    </div>
+    <h1>T3</h1>
 
     <div class='container text-center phase3'> <!-- Text-center is superfluous right now-->
       <div class='row'>
@@ -33,29 +28,39 @@
     </div>
     <p id='notice' class='phase3'></p>
 
+    <div class='container stats'> <!-- Text-center is superfluous right now-->
+      <div class='row'>
+        <div id='stats1' class='col-12 box stats'></div>
+        <div id='stats2' class='col-12 box stats'></div>
+        <div id='stats3' class='col-12 box stats'></div>
+        <div id='stats4' class='col-12 box stats'></div>
+        <div id='stats5' class='col-12 box stats'></div>
+      </div>
+    </div>
+
     <p id='auth-notice' class='phase1 phase2'></p>
 
-    <form id='sign-in' class='border phase1'>
+    <form id='sign-in' class='border phase1 text-center'>
       <fieldset>
-        <legend>Sign in!</legend>
+        <legend class='text-center'>Sign in!</legend>
         <input type="text" name="credentials[email]" placeholder="Email">
-        <input type="password" name="credentials[password]" placeholder="Password">
+        <input type="password" name="credentials[password]" placeholder="Password"><br>
         <input type="submit" value="Sign in!">
       </fieldset>
     </form>
 
-    <form id="create-game" class="border phase2">
+    <form id="create-game" class="text-center border phase2">
       <fieldset>
         <input type="submit" value="New game">
       </fieldset>
     </form>
 
-    <form id="sign-up" class="border phase1">
+    <form id="sign-up" class="border text-center phase1">
       <fieldset>
-        <legend>Sign up!</legend>
+        <legend>Not a member? Sign up!</legend>
         <input type="text" name="credentials[email]" placeholder="Email">
         <input type="password" name="credentials[password]" placeholder="Password">
-        <input type="password" name="credentials[password_confirmation]" placeholder="Confirm Password">
+        <input type="password" name="credentials[password_confirmation]" placeholder="Confirm Password"><br>
         <input type="submit" value="Sign up new user">
       </fieldset>
     </form>

@@ -87,6 +87,7 @@ const onCreateSuccess = function (responseData) {
   $('#notice').html(`It's ${store.game.cells.filter(cell => cell === '').length % 2 === 1 ? 'X' : 'O'}'s turn`)
   $('#auth-notice').html('You started a new game!')
   $('.phase2').hide()
+  $('.stats').hide()
   $('.phase3').show()
   $('div.box').text('')
 }

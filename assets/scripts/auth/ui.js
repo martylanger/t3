@@ -22,6 +22,7 @@ const signInSuccess = function (data) {
   $('form').trigger('reset')
   $('.phase1').hide()
   $('.phase2').show()
+  $('.stats').show()
   console.log('signInSuccess ran. Data is :', data)
   store.user = data.user
 
@@ -87,12 +88,11 @@ const getStatsSuccess = function (data) {
   store.stats.drawCount = drawCount
   store.stats.unfinishedCount = unfinishedCount
 
-  $('#stats').text(
-    `Games: ${numGames}
-    Wins: ${winCount}
-    Losses: ${lossCount}
-    Draws: ${drawCount}
-    Unfinished: ${unfinishedCount}`)
+  $('#stats1').html(`Games: ${numGames}`)
+  $('#stats2').html(`Wins: ${winCount}`)
+  $('#stats3').html(`Losses: ${lossCount}`)
+  $('#stats4').html(`Draws: ${drawCount}`)
+  $('#stats5').html(`Unfinished: ${unfinishedCount}`)
 }
 
 const getStatsFailure = function (error) {
@@ -103,6 +103,7 @@ const signOutSuccess = function () {
   $('#auth-notice').text('Signed out successfully')
   $('form').trigger('reset')
   $('.phase2').hide()
+  $('.stats').hide()
   $('.phase3').hide()
   $('.phase1').show()
   console.log('signOutSuccess ran and nothing was returned!')
