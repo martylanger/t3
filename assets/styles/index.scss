@@ -1,15 +1,28 @@
 @import '~bootstrap/scss/bootstrap';
 
-$alt-color: $cyan;
-$body-bg-color: $gray-200;
+$alt-color: $black;
+$alt-background: #bb5050;
+$body-bg-color: #d0d8e0;
 $font-color: $light;
 
 body {
   background-color: $body-bg-color;
 }
 
+p {
+  margin: 3px;
+  padding: 3px auto;
+}
+
 .phase2 {
   display: none;
+}
+
+.stats {
+  border: 0;
+  display: none;
+  height: auto;
+  padding: 0;
 }
 
 .phase3 {
@@ -26,6 +39,11 @@ body {
   justify-content: center;
 }
 
-.alt-color {
-  background-color: $alt-color;
+.win-line {
+  background: $alt-background;
+  color: $alt-color;
+}
+
+.sign-out {
+  margin-top: 40px;
 }

@@ -29,9 +29,9 @@ const vestigial = {
 }
 
 const update = function (thisGame) {
-  console.log('running update')
-  // console.log(store.game.id)
-  // console.log(config.apiUrl + '/games/' + store.game.id)
+  // console.log('running update')
+  // // console.log(store.game.id)
+  // // console.log(config.apiUrl + '/games/' + store.game.id)
   return $.ajax({
     url: config.apiUrl + '/games/' + store.game.id,
     method: 'PATCH',
@@ -43,7 +43,7 @@ const update = function (thisGame) {
 }
 
 const create = function () {
-  console.log('running create')
+  // console.log('running create')
   return $.ajax({
     url: config.apiUrl + '/games',
     method: 'POST',

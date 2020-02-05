@@ -2,8 +2,7 @@
 
 const api = require('./api.js')
 const ui = require('./ui.js')
-const authApi = require('./../auth/api.js')
-// const index = require('./../../../index.js')
+// const authApi = require('./../auth/api.js')
 // const t3 = require('./t3.js')
 const store = require('./../store')
 
@@ -16,7 +15,7 @@ require('./../app.js')
 
 let xo = 'J'
 let position = 9
-
+let gameOn = false
 const comments2 = {
   // const isEmptyString = function (cell) {
   //   return cell === ""
@@ -33,9 +32,10 @@ const comments2 = {
   //   xo = response.cells.filter(cell => cell === "").length % 2 === 1 ? 'X' : 'O'
   // }
 }
+let winLine = []
 
 const winCheck = function (board, xoxo) {
-  console.log('running winCheck')
+  // // console.log('running winCheck')
   // enumerate the win conditions
   const wins = [
     [0, 1, 2],
@@ -48,27 +48,57 @@ const winCheck = function (board, xoxo) {
     [2, 4, 6]
   ]
   let boolean = false
-  let i = 0
+  // let i = 0
   // check all the win conditions to see if any has been met
-  while (!boolean && i < wins.length) {
+  // while (!boolean && i < wins.length) {
+  for (let i = 0; i < wins.length; i++) {
     boolean =
     board[wins[i][0]] === xoxo &&
     board[wins[i][1]] === xoxo &&
     board[wins[i][2]] === xoxo
-    i++
+    if (boolean) {
+      if (gameOn) {
+        winLine.push(wins[i][0])
+        winLine.push(wins[i][1])
+        winLine.push(wins[i][2])
+        boolean = false
+      } else {
+        return true
+      }
+    }
+    // i++
   }
-  return boolean
+  // if (boolean) {
+  // winLine = wins[i - 1]
+  // return boolean
+  return winLine.length > 0
 }
 
+// for (let i = 0; i < wins.length; i++) {
+//   const a = wins[i][0]
+//   const b = wins[i][1]
+//   const c = wins[i][2]
+//   if (
+//     board[a] === xoxo &&
+//     board[b] === xoxo &&
+//     board[c] === xoxo
+//   ) {
+//     winBoxes.push(a)
+//     winBoxes.push(b)
+//     winBoxes.push(c)
+//   }
+// }
+// return winBoxes.length > 0
+// }
+
 const drawCheck = function (board) {
-  console.log('running drawCheck')
+  // // console.log('running drawCheck')
   const draw = !board.includes('')
-  console.log('draw? ' + draw)
   return draw
 }
 
 const isOver = function (board) {
-  console.log('running isOver')
+  // // console.log('running isOver')
   if (winCheck(board, xo)) {
     return true
   } else if (drawCheck(board)) {
@@ -79,7 +109,7 @@ const isOver = function (board) {
 }
 
 const clickCell = function (event) {
-  console.log('running clickCell')
+  // // console.log('running clickCell')
   // whose turn is it?
   xo = store.game.cells.filter(cell => cell === '').length % 2 === 1 ? 'X' : 'O'
   // if user clicked an empty cell:
@@ -96,27 +126,36 @@ const clickCell = function (event) {
       store.game.over = true
       // update the stats totals and display game over message
       store.stats.numGames++
-      if (drawCheck(store.game.cells)) {
-        $('#notice').text('Game over. Nobody wins!')
-        store.stats.drawCount++
-      } else {
+      if (winCheck(store.game.cells)) {
         $('#notice').text('Game over. ' + xo + ' wins!')
         const player = store.user.id === store.game.player_x.id ? 'X' : 'O'
         if (player === xo) {
           store.stats.winCount++
+          $('#stats2').addClass('win-line')
         } else {
           store.stats.lossCount++
+          $('#stats3').addClass('win-line')
         }
+      } else {
+        $('#notice').text('Game over. Nobody wins!')
+        store.stats.drawCount++
+        $('#stats4').addClass('win-line')
       }
-      // return phase2 features to the ui with updated stats
-      $('#stats').text(
-        `Games: ${store.stats.numGames}
-        Wins: ${store.stats.winCount}
-        Losses: ${store.stats.lossCount}
-        Draws: ${store.stats.drawCount}
-        Unfinished: ${store.stats.unfinishedCount}`)
+      $(`#${winLine[0]}`).addClass('win-line')
+      $(`#${winLine[1]}`).addClass('win-line')
+      $(`#${winLine[2]}`).addClass('win-line')
+      $(`#${winLine[3]}`).addClass('win-line')
+      $(`#${winLine[4]}`).addClass('win-line')
+      $(`#${winLine[5]}`).addClass('win-line')
+      // return phase2 features and stats to the ui with updated stats
+      $('#stats1').text(`Games: ${store.stats.numGames}`)
+      $('#stats2').text(`Wins: ${store.stats.winCount}`)
+      $('#stats3').text(`Losses: ${store.stats.lossCount}`)
+      $('#stats4').text(`Draws: ${store.stats.drawCount}`)
+      $('#stats5').text(`Unfinished: ${store.stats.unfinishedCount}`)
       $('#auth-notice').text('')
       $('.phase2').show()
+      $('.stats').show()
     }
   }
 }
@@ -124,7 +163,7 @@ const clickCell = function (event) {
 const onUpdateGame = function (event) {
   // prevent default submit action to stop the page from refreshingCreate
   event.preventDefault()
-  console.log('running onUpdateGame')
+  // // console.log('running onUpdateGame')
   clickCell(event)
   // create a javascript object from clickCell info
   const thisGame = {
@@ -143,7 +182,20 @@ const onUpdateGame = function (event) {
 
 const onCreateGame = function (event) {
   event.preventDefault()
-  console.log('running onCreateGame')
+  // // console.log('running onCreateGame')
+  gameOn = true
+  $(`#${winLine[0]}`).removeClass('win-line')
+  $(`#${winLine[1]}`).removeClass('win-line')
+  $(`#${winLine[2]}`).removeClass('win-line')
+  $(`#${winLine[3]}`).removeClass('win-line')
+  $(`#${winLine[4]}`).removeClass('win-line')
+  $(`#${winLine[5]}`).removeClass('win-line')
+  $('#stats2').removeClass('win-line')
+  $('#stats3').removeClass('win-line')
+  $('#stats4').removeClass('win-line')
+
+  winLine = []
+
   api.create()
     .then(ui.onCreateSuccess)
     .catch(ui.onCreateFailure)
