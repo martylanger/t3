@@ -1,8 +1,8 @@
 @import '~bootstrap/scss/bootstrap';
 
 $alt-color: $black;
-$alt-background: cyan;
-$body-bg-color: $gray-200;
+$alt-background: #bb5050;
+$body-bg-color: #d0d8e0;
 $font-color: $light;
 
 body {
@@ -42,4 +42,8 @@ p {
 .win-line {
   background: $alt-background;
   color: $alt-color;
+}
+
+.sign-out {
+  margin-top: 40px;
 }

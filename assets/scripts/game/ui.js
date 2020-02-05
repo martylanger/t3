@@ -8,7 +8,7 @@ const vestigials = {
 // const onIndexSuccess = function (responseData) {
 //   // log the information we get back from the API so we know how we can
 //   // interact with it.
-//   console.log(responseData)
+//   // console.log(responseData)
 //
 //   // empty book-display element so we can replace whatever was there with the
 //   // books we get back from the API
@@ -32,7 +32,7 @@ const vestigials = {
 // const onShowSuccess = function (responseData) {
 //   // log the information we get back from the API so we know how we can
 //   // interact with it.
-//   console.log(responseData)
+//   // console.log(responseData)
 //
 //   // build HTML element with data for one book
 //   const bookHTML = (`
@@ -74,7 +74,7 @@ const vestigials = {
 }
 
 const onUpdateSuccess = function (responseData) {
-  console.log('running onUpdateSuccess')
+  // console.log('running onUpdateSuccess')
   if (!responseData.game.over) {
     store.game = responseData.game
     $('#notice').html(`It's ${store.game.cells.filter(cell => cell === '').length % 2 === 1 ? 'X' : 'O'}'s turn`)
@@ -82,7 +82,7 @@ const onUpdateSuccess = function (responseData) {
 }
 
 const onCreateSuccess = function (responseData) {
-  console.log('running onCreateSuccess')
+  // console.log('running onCreateSuccess')
   store.game = responseData.game
   $('#notice').html(`It's ${store.game.cells.filter(cell => cell === '').length % 2 === 1 ? 'X' : 'O'}'s turn`)
   $('#auth-notice').html('You started a new game!')
@@ -93,7 +93,7 @@ const onCreateSuccess = function (responseData) {
 }
 
 const onCreateFailure = function (responseData) {
-  console.log('running onCreateFailure')
+  // console.log('running onCreateFailure')
   $('#auth-notice').html('You failed to create a game')
 }
 

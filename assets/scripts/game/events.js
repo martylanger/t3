@@ -2,8 +2,7 @@
 
 const api = require('./api.js')
 const ui = require('./ui.js')
-const authApi = require('./../auth/api.js')
-// const index = require('./../../../index.js')
+// const authApi = require('./../auth/api.js')
 // const t3 = require('./t3.js')
 const store = require('./../store')
 
@@ -36,7 +35,7 @@ const comments2 = {
 let winLine = []
 
 const winCheck = function (board, xoxo) {
-  console.log('running winCheck')
+  // // console.log('running winCheck')
   // enumerate the win conditions
   const wins = [
     [0, 1, 2],
@@ -62,7 +61,6 @@ const winCheck = function (board, xoxo) {
         winLine.push(wins[i][0])
         winLine.push(wins[i][1])
         winLine.push(wins[i][2])
-        console.log('winner!!!!!')
         boolean = false
       } else {
         return true
@@ -94,13 +92,13 @@ const winCheck = function (board, xoxo) {
 // }
 
 const drawCheck = function (board) {
-  console.log('running drawCheck')
+  // // console.log('running drawCheck')
   const draw = !board.includes('')
   return draw
 }
 
 const isOver = function (board) {
-  console.log('running isOver')
+  // // console.log('running isOver')
   if (winCheck(board, xo)) {
     return true
   } else if (drawCheck(board)) {
@@ -111,7 +109,7 @@ const isOver = function (board) {
 }
 
 const clickCell = function (event) {
-  console.log('running clickCell')
+  // // console.log('running clickCell')
   // whose turn is it?
   xo = store.game.cells.filter(cell => cell === '').length % 2 === 1 ? 'X' : 'O'
   // if user clicked an empty cell:
@@ -165,7 +163,7 @@ const clickCell = function (event) {
 const onUpdateGame = function (event) {
   // prevent default submit action to stop the page from refreshingCreate
   event.preventDefault()
-  console.log('running onUpdateGame')
+  // // console.log('running onUpdateGame')
   clickCell(event)
   // create a javascript object from clickCell info
   const thisGame = {
@@ -184,7 +182,7 @@ const onUpdateGame = function (event) {
 
 const onCreateGame = function (event) {
   event.preventDefault()
-  console.log('running onCreateGame')
+  // // console.log('running onCreateGame')
   gameOn = true
   $(`#${winLine[0]}`).removeClass('win-line')
   $(`#${winLine[1]}`).removeClass('win-line')

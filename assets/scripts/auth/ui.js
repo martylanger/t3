@@ -7,7 +7,7 @@ const gameEvents = require('./../game/events')
 const signUpSuccess = function (data) {
   $('#auth-notice').text('Signed up successfully')
   $('form').trigger('reset')
-  console.log('signUpSuccess ran. Data is :', data)
+  // console.log('signUpSuccess ran. Data is :', data)
 }
 
 const signUpFailure = function (error) {
@@ -23,7 +23,7 @@ const signInSuccess = function (data) {
   $('.phase1').hide()
   $('.phase2').show()
   $('.stats').show()
-  console.log('signInSuccess ran. Data is :', data)
+  // console.log('signInSuccess ran. Data is :', data)
   store.user = data.user
 
   api.getStats(data)
@@ -106,7 +106,7 @@ const signOutSuccess = function () {
   $('.stats').hide()
   $('.phase3').hide()
   $('.phase1').show()
-  console.log('signOutSuccess ran and nothing was returned!')
+  // console.log('signOutSuccess ran and nothing was returned!')
   store.user = null
 }
 
@@ -117,7 +117,7 @@ const signOutFailure = function (error) {
 
 const changePasswordSuccess = function () {
   $('#auth-notice').text('Changed password successfully')
-  console.log('changePasswordSuccess ran and nothing was returned!')
+  // console.log('changePasswordSuccess ran and nothing was returned!')
 }
 
 const changePasswordFailure = function (error) {
