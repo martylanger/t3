@@ -9,6 +9,11 @@ body {
   background-color: $body-bg-color;
 }
 
+p {
+  margin: 3px;
+  padding: 3px auto;
+}
+
 .phase2 {
   display: none;
 }

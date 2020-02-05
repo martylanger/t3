@@ -192,6 +192,9 @@ const onCreateGame = function (event) {
   $(`#${winLine[3]}`).removeClass('win-line')
   $(`#${winLine[4]}`).removeClass('win-line')
   $(`#${winLine[5]}`).removeClass('win-line')
+  $('#stats2').removeClass('win-line')
+  $('#stats3').removeClass('win-line')
+  $('#stats4').removeClass('win-line')
 
   winLine = []
 
