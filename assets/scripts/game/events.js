@@ -133,12 +133,15 @@ const clickCell = function (event) {
         const player = store.user.id === store.game.player_x.id ? 'X' : 'O'
         if (player === xo) {
           store.stats.winCount++
+          $('#stats2').addClass('win-line')
         } else {
           store.stats.lossCount++
+          $('#stats3').addClass('win-line')
         }
       } else {
         $('#notice').text('Game over. Nobody wins!')
         store.stats.drawCount++
+        $('#stats4').addClass('win-line')
       }
       $(`#${winLine[0]}`).addClass('win-line')
       $(`#${winLine[1]}`).addClass('win-line')
@@ -146,7 +149,7 @@ const clickCell = function (event) {
       $(`#${winLine[3]}`).addClass('win-line')
       $(`#${winLine[4]}`).addClass('win-line')
       $(`#${winLine[5]}`).addClass('win-line')
-      // return phase2 features to the ui with updated stats
+      // return phase2 features and stats to the ui with updated stats
       $('#stats1').text(`Games: ${store.stats.numGames}`)
       $('#stats2').text(`Wins: ${store.stats.winCount}`)
       $('#stats3').text(`Losses: ${store.stats.lossCount}`)
