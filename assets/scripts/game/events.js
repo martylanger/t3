@@ -8,34 +8,41 @@ const store = require('./../store')
 
 require('./../app.js')
 
+{
+// collapse me! I'm vestigial!
+
 // const gameApi = require('./api.js')
 // const gameEvents = require('./events.js')
 // const gameUi = require('./ui.js')
 // const store = require('./../store')
+}
 
 let xo = 'J'
 let position = 9
 let gameOn = false
-const comments2 = {
-  // const isEmptyString = function (cell) {
-  //   return cell === ""
-  // }
-  // const whosTurn = function (response) {
-  //   response.cells.filter(isEmptyString).length % 2 === 1 ? 'X' : 'O'
-  // }
-  // const turnSwitch = function () {
-  //   xo === 'X' ? xo = 'O' : xo = 'X'
-  // }
 
-  // Is there an odd number of cells empty? If yes, it's X's turn, otherwise it's O's turn
-  // const whichTurn = function (response) {
-  //   xo = response.cells.filter(cell => cell === "").length % 2 === 1 ? 'X' : 'O'
-  // }
+{
+// collpase me! I'm vestigial!
+
+// const isEmptyString = function (cell) {
+//   return cell === ""
+// }
+// const whosTurn = function (response) {
+//   response.cells.filter(isEmptyString).length % 2 === 1 ? 'X' : 'O'
+// }
+// const turnSwitch = function () {
+//   xo === 'X' ? xo = 'O' : xo = 'X'
+// }
+
+// Is there an odd number of cells empty? If yes, it's X's turn, otherwise it's O's turn
+// const whichTurn = function (response) {
+//   xo = response.cells.filter(cell => cell === "").length % 2 === 1 ? 'X' : 'O'
+// }
 }
+
 let winLine = []
 
 const winCheck = function (board, xoxo) {
-  // // console.log('running winCheck')
   // enumerate the win conditions
   const wins = [
     [0, 1, 2],
@@ -47,9 +54,10 @@ const winCheck = function (board, xoxo) {
     [0, 4, 8],
     [2, 4, 6]
   ]
+
+  // check all the win conditions to see if any has been met
   let boolean = false
   // let i = 0
-  // check all the win conditions to see if any has been met
   // while (!boolean && i < wins.length) {
   for (let i = 0; i < wins.length; i++) {
     boolean =
@@ -74,6 +82,9 @@ const winCheck = function (board, xoxo) {
   return winLine.length > 0
 }
 
+{
+// collapse me! I'm vestigial!
+
 // for (let i = 0; i < wins.length; i++) {
 //   const a = wins[i][0]
 //   const b = wins[i][1]
@@ -90,15 +101,14 @@ const winCheck = function (board, xoxo) {
 // }
 // return winBoxes.length > 0
 // }
+}
 
 const drawCheck = function (board) {
-  // // console.log('running drawCheck')
   const draw = !board.includes('')
   return draw
 }
 
 const isOver = function (board) {
-  // // console.log('running isOver')
   if (winCheck(board, xo)) {
     return true
   } else if (drawCheck(board)) {
@@ -109,12 +119,11 @@ const isOver = function (board) {
 }
 
 const clickCell = function (event) {
-  // // console.log('running clickCell')
-  // whose turn is it?
-  xo = store.game.cells.filter(cell => cell === '').length % 2 === 1 ? 'X' : 'O'
   // if user clicked an empty cell:
   if (!$(event.target).text() && !store.game.over) {
-    // get position of click 0-8
+    // whose turn is it?
+    xo = store.game.cells.filter(cell => cell === '').length % 2 === 1 ? 'X' : 'O'
+    // get position of click, 0-8
     position = event.target.id
     // insert xo into the chosen cell
     $(event.target).text(xo)
@@ -124,35 +133,35 @@ const clickCell = function (event) {
     if (isOver(store.game.cells)) {
       // if it's over, set the local game.over value to true
       store.game.over = true
-      // update the stats totals and display game over message
+      // update the stats totals and display "game over" message
       store.stats.numGames++
       if (winCheck(store.game.cells)) {
-        $('#notice').text('Game over. ' + xo + ' wins!')
         const player = store.user.id === store.game.player_x.id ? 'X' : 'O'
         if (player === xo) {
           store.stats.winCount++
-          $('#stats2').addClass('win-line')
+          $('#number-of-wins').addClass('win-line')
         } else {
           store.stats.lossCount++
-          $('#stats3').addClass('win-line')
+          $('#number-of-losses').addClass('win-line')
         }
+        $('#notice').text('Game over. ' + xo + ' wins!')
       } else {
         $('#notice').text('Game over. Nobody wins!')
         store.stats.drawCount++
-        $('#stats4').addClass('win-line')
+        $('#number-of-draws').addClass('win-line')
       }
+      // mark the winning boxes with class 'win-line'
       $(`#${winLine[0]}`).addClass('win-line')
       $(`#${winLine[1]}`).addClass('win-line')
       $(`#${winLine[2]}`).addClass('win-line')
       $(`#${winLine[3]}`).addClass('win-line')
       $(`#${winLine[4]}`).addClass('win-line')
-      $(`#${winLine[5]}`).addClass('win-line')
       // return phase2 features and stats to the ui with updated stats
-      $('#stats1').text(`Games: ${store.stats.numGames}`)
-      $('#stats2').text(`Wins: ${store.stats.winCount}`)
-      $('#stats3').text(`Losses: ${store.stats.lossCount}`)
-      $('#stats4').text(`Draws: ${store.stats.drawCount}`)
-      $('#stats5').text(`Unfinished: ${store.stats.unfinishedCount}`)
+      $('#number-of-games').text(`Games: ${store.stats.numGames}`)
+      $('#number-of-wins').text(`Wins: ${store.stats.winCount}`)
+      $('#number-of-losses').text(`Losses: ${store.stats.lossCount}`)
+      $('#number-of-draws').text(`Draws: ${store.stats.drawCount}`)
+      $('#number-of-unfinished').text(`Unfinished: ${store.stats.unfinishedCount}`)
       $('#auth-notice').text('')
       $('.phase2').show()
       $('.stats').show()
@@ -161,9 +170,8 @@ const clickCell = function (event) {
 }
 
 const onUpdateGame = function (event) {
-  // prevent default submit action to stop the page from refreshingCreate
+  // prevent default submit action to stop the page from refreshing
   event.preventDefault()
-  // // console.log('running onUpdateGame')
   clickCell(event)
   // create a javascript object from clickCell info
   const thisGame = {
@@ -182,17 +190,15 @@ const onUpdateGame = function (event) {
 
 const onCreateGame = function (event) {
   event.preventDefault()
-  // // console.log('running onCreateGame')
   gameOn = true
   $(`#${winLine[0]}`).removeClass('win-line')
   $(`#${winLine[1]}`).removeClass('win-line')
   $(`#${winLine[2]}`).removeClass('win-line')
   $(`#${winLine[3]}`).removeClass('win-line')
   $(`#${winLine[4]}`).removeClass('win-line')
-  $(`#${winLine[5]}`).removeClass('win-line')
-  $('#stats2').removeClass('win-line')
-  $('#stats3').removeClass('win-line')
-  $('#stats4').removeClass('win-line')
+  $('#number-of-wins').removeClass('win-line')
+  $('#number-of-losses').removeClass('win-line')
+  $('#number-of-draws').removeClass('win-line')
 
   winLine = []
 

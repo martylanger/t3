@@ -39,7 +39,7 @@
 // }
 //
 // const winCheck = function (board) {
-//   // console.log('running winCheck')
+//   console.log('running winCheck')
 //   // enumerate the win conditions
 //   const wins = [
 //     [0, 1, 2],
@@ -65,9 +65,9 @@
 // }
 //
 // const drawCheck = function (board) {
-//   // console.log('running drawCheck')
-//   // console.log(board)
-//   // console.log(board.game)
+//   console.log('running drawCheck')
+//   console.log(board)
+//   console.log(board.game)
 //   return !board.game.cells.includes('')
 // }
 //
@@ -82,14 +82,14 @@
 // }
 //
 // const clickCell = function (event) {
-//   // console.log('clickCell running')
+//   console.log('clickCell running')
 //   xo = store.game.cells.filter(cell => cell === '').length % 2 === 1 ? 'X' : 'O'
-//   // console.log('xo = ' + xo)
-//   // console.log($(event.target))
+//   console.log('xo = ' + xo)
+//   console.log($(event.target))
 //   if (!$(event.target).text()) {
 //     // get position in board 0-8
 //     position = event.target.id
-//     // console.log('position = ' + position)
+//     console.log('position = ' + position)
 //     // insert xo
 //     $(event.target).text(xo)
 //     // turnSwitch()

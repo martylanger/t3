@@ -7,14 +7,12 @@ const gameEvents = require('./../game/events')
 const signUpSuccess = function (data) {
   $('#auth-notice').text('Signed up successfully')
   $('form').trigger('reset')
-  // console.log('signUpSuccess ran. Data is :', data)
 }
 
 const signUpFailure = function (error) {
-  $('#auth-notice').text('Error on sign up')
+  $('#auth-notice').text('Error on sign up: ' + error)
   $('#auth-notice').show()
   $('form').trigger('reset')
-  console.error('signUpFailure ran. Error is :', error)
 }
 
 const signInSuccess = function (data) {
@@ -23,7 +21,6 @@ const signInSuccess = function (data) {
   $('.phase1').hide()
   $('.phase2').show()
   $('.stats').show()
-  // console.log('signInSuccess ran. Data is :', data)
   store.user = data.user
 
   api.getStats(data)
@@ -32,10 +29,9 @@ const signInSuccess = function (data) {
 }
 
 const signInFailure = function (error) {
-  $('#auth-notice').text('Error on sign in')
+  $('#auth-notice').text('Error on sign in: ' + error)
   $('#auth-notice').show()
   $('form').trigger('reset')
-  console.error('signInFailure ran. Error is :', error)
 }
 
 const whoWon = function (game) {
@@ -88,15 +84,16 @@ const getStatsSuccess = function (data) {
   store.stats.drawCount = drawCount
   store.stats.unfinishedCount = unfinishedCount
 
-  $('#stats1').html(`Games: ${numGames}`)
-  $('#stats2').html(`Wins: ${winCount}`)
-  $('#stats3').html(`Losses: ${lossCount}`)
-  $('#stats4').html(`Draws: ${drawCount}`)
-  $('#stats5').html(`Unfinished: ${unfinishedCount}`)
+  $('#number-of-games').html(`Games: ${numGames}`)
+  $('#number-of-wins').html(`Wins: ${winCount}`)
+  $('#number-of-losses').html(`Losses: ${lossCount}`)
+  $('#number-of-draws').html(`Draws: ${drawCount}`)
+  $('#number-of-unfinished').html(`Unfinished: ${unfinishedCount}`)
 }
 
 const getStatsFailure = function (error) {
   console.error('running getStatsFailure. Error is :', error)
+  $('form').trigger('reset')
 }
 
 const signOutSuccess = function () {
@@ -106,22 +103,23 @@ const signOutSuccess = function () {
   $('.stats').hide()
   $('.phase3').hide()
   $('.phase1').show()
-  // console.log('signOutSuccess ran and nothing was returned!')
   store.user = null
 }
 
 const signOutFailure = function (error) {
   $('#auth-notice').text('Error on sign out')
+  $('form').trigger('reset')
   console.error('signOutFailure ran. Error is :', error)
 }
 
 const changePasswordSuccess = function () {
   $('#auth-notice').text('Changed password successfully')
-  // console.log('changePasswordSuccess ran and nothing was returned!')
+  $('form').trigger('reset')
 }
 
 const changePasswordFailure = function (error) {
   $('#auth-notice').text('Error on change password')
+  $('form').trigger('reset')
   console.error('changePasswordFailure ran. Error is :', error)
 }
 

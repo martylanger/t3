@@ -1,129 +1,60 @@
-[![General Assembly Logo](https://camo.githubusercontent.com/1a91b05b8f4d44b5bbfb83abac2b0996d8e26c92/687474703a2f2f692e696d6775722e636f6d2f6b6538555354712e706e67)](https://generalassemb.ly/education/web-development-immersive)
 
-# browser-template
+# T3
 
-A template for starting front-end projects. Webpack for `require` system, build
-pipeline, and development server. Boostrap and Handlebars.js included. No
-front-end frameworks included.
+T3 allows users on the same physical device to play tic-tac-toe against one another, or a single player to play against themself. The primary user has an account - with a user name and password - that keeps track of their total number of games played, games won, games lost, games drawn, and unfinished games.
 
-## Installation
+My primary aim for this project was to make as solid a product as I could rather than to be overly ambitious with the addition of features. After meeting the basic requirements, I generally added styles and functionalities where they most naturally seemed called-for, always with the idea of adding to the basic product rather than overhauling my existing code.
 
-1. [Download](../../archive/master.zip) this template.
-    - **Do Not Fork And Clone**
-    - Click the "Clone or Download" button and select "Download Zip".
-1. Move to the `wdi/projects` directory, then unzip the template directory with
-    `unzip /Users/<user-name>/Downloads/browser-template-master.zip`.
-1. Rename the template directory from `browser-template-master` to
-    `<project-name>-client`.
-1. Empty [`README.md`](README.md) and fill with your own content.
-1. Replace all instances of `t3` with the name of
-    your project.
-    - You can search for all instances of text in Atom by pressing
-    `commant + shift + f` on Mac or `ctrl + shift + f` on WSL.
-1. Move into the new project and `git init`.
-1. Add all of the files in your project with the command `git add --all`.
-      - **Note: This is the only time you should run this command!**
-1. Commit all of your files with the command `git commit`.
-      - Your commit title should read `Initial commit`.
-1. Install dependencies with `npm install`.
-1. Create a new repository on [github.com](https://github.com),
-    _not GitHub Enterprise_.
-1. Name the new repository with the same name used on Step 3.
-1. Follow the instructions on your new repository's setup page. For details on
-   how to push to Github, refer to the section on Github entitled "…or push an existing
-   repository from the command line." Further documentation can be found [here](https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/).
+## Links
 
-## Structure
+- [Deployed T3](https://martylanger.github.io/t3/)
+- [T3 GitHub Repository](https://github.com/martylanger/t3/)
 
-### Scripts
+## Planning Story
 
-Developers should store JavaScript files in [`assets/scripts`](assets/scripts).
-The "manifest" or entry-point is
-[`assets/scripts/app.js`](assets/scripts/app.js). In general, only
-application initialization goes in this file. It's normal for developers to
-start putting all code in this file, but encourage them to break out different
-responsibilities and use the `require` syntax put references where they're
-needed.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer id ornare magna. Curabitur leo arcu, elementum in posuere vitae, rutrum eu urna. Quisque tincidunt nulla sed mi cursus, nec tristique est fermentum. Etiam lacinia id neque ut egestas. Sed consequat convallis felis nec posuere. Sed non eros sed velit viverra tincidunt. Etiam et tortor sit amet lacus volutpat dignissim. Vestibulum convallis, felis a posuere pretium, turpis enim sollicitudin neque, pretium finibus leo metus sed sapien. Praesent iaculis pharetra nunc ac rhoncus. Duis eu risus in est porttitor egestas sit amet eget metus. Maecenas iaculis auctor ullamcorper. Donec pretium dolor non nisl egestas bibendum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ullamcorper pulvinar orci interdum mattis. Ut gravida volutpat mauris, a semper risus maximus ut.
 
-### Config
+All of which is to say, I set out intending basically to follow the schedule suggested by the program instructors, and I pretty much did. This entailed starting with UI and the game engine, then handling authentication, then the game API, then README, debugging and style.
 
-Developers should set `apiUrls.production` and `apiUrls.development` in
-[`assets/scripts/config.js`](assets/scripts/config.js).  With
-`apiUrls` set, developers may rely on `apiUrl` as the base for API
-URLs.
+I started with a 3x3 bootstrap board in my HTML. Since I already knew that the API would be handling the game state as an array with nine strings, I had all the elements I needed to make my game engine. My usual style is to keep pulling on a thread once I have a good grip on it, so I wrote a full game engine at this point, neglecting to do any testing whatsoever because I had yet to set up communication with the game API, and I didn't think much about trying to simulate it. When I finally reached the point of building in communication with the game API, I debugged madly with console.logs and grunt serve as my primary tools. Overall, the lack of testing didn't turn out as catastrophically as I imagined it would; there was a lot of debugging to do, but it wasn't overwhelming. However, I did learn that I would understand my own code much better if I built it starting with the basic pieces, rather than writing some big parts before the other separate parts that they depended on.
 
-### Styles
+Much of my game engine was built with a full-featured application in mind, so there are a handful of instances in the code where things may look needlessly complicated or have extraneous parts that I was imagining would be necessary for this or that functionality. The code should be relatively amenable to stopping and restarting games, multiplayer games, and perhaps an AI should I decide to build those on at a later date.
 
-Developers should store styles in [`assets/styles`](assets/styles) and load them
-from [`assets/styles/index.scss`](assets/styles/index.scss). Bootstrap version 3 is
-included in this template.
+For authentication and the game API, I leaned heavily on the pertinent GA lessons and their examples, going so far as to start with the examples as my templates. For authentication I tested with curl scripts, but for the game API I went straight to the AJAX.
 
-### Forms and Using `getFormFields`
+I left README and style for last, and both are works in progress, as of these keystrokes.
 
-Developers should use [getFormFields](get-form-fields.md) to retrieve form data
-to send to an API.
+### Technologies Used
 
-### Deployment
+- JavaScript
+- jQuery
+- HTML/SCSS
+- AJAX
+- Bootstrap
 
-To deploy a browser-template based SPA, run `grunt deploy`.
+### Unsolved Problems
 
-## Adding Images
+- For organization and learning's sake, I still need to refactor several pieces of my code. In order to ensure the proper communication between my various functions and variables, much of the code that I originally wanted to put in a separate game engine file (t3.js) ended up dispersed around my game/events and game/ui files.
+- I still need to put more and better notes/comments in my code to make it more readable.
+- I still need to fix the sizing and alignment of the elements on my page, and before and after games I would like to have the auth actions on one side of the page and the "quick play" button (before sign-in) or stats (when signed in), as planned in my wireframe.
+- In addition to overhauling my layout, I need to add many other style elements to my game, which currently has a very barebones interface. At the least, I would like to restyle the board, the X's and O's, and the messages to the user.
+- I would like to add a "quick play" capability, which would use dummy credentials to communicate with the API and wouldn't display stats.
+- I would like to add the ability to restart an unfinished game - this is a feature that I didn't have time to implement, but that I designed my game to support. (In particular, I chose to determine whose turn it is not by having a variable switch between X and O from the start of the game, but rather by deducing it from the game state.)
+- I would like to change my "New Game" and "Sign Out" elements in the HTML to "button" inputs instead of "submit" inputs.
+- I would like to randomize whether the primary user is X or O each game - or else to let the primary user choose whether they play as X or O.
+- I still would like to add the ability to play with another user remotely, as I designed some parts of my code to support that functionality.
+- I would like to come up with a new storyline to underpin tic-tac-toe and design my game around that storyline.
+- Inspired by the projects of others, I would like to add the ability to view previous games.
 
-To add images to your project, you must store them in the `public` directory.
-To use the image in HTML or CSS, write the path to the image like this:
+#### Wireframe:
+![wireframe](https://imgur.com/rHdwwyB)
 
-```html
-<img src="public/cat.jpg">
-```
-or
-```css
-#my-cool-div {
-  background-image: url('public/cat.jpg')
-}
-```
+### User Stories
 
-Note that there's no `./` or `/` in front of `public/filename.jpg`.
-
-## Adding Fonts
-
-To add custom fonts to your app, you can either use a CDN like Google Fonts, or
-you can download the fonts and save them in the `public` directory. If you use
-the former method, follow the directions on the website providing the fonts.
-
-For local fonts, put the files in `public`, and then import and use them in a
-`.scss` file like this:
-
-```scss
-@font-face {
-  font-family: 'Nature Beauty';
-  src: url('public/Nature-Beauty.ttf') format('truetype');
-}
-
-.element-with-custom-font {
-  font-family: 'Nature Beauty';
-}
-```
-
-## Tasks
-
-Developers should run these often!
-
-- `grunt nag` or just `grunt`: runs code quality analysis tools on your code
-    and complains
-- `grunt make-standard`: reformats all your code in the JavaScript Standard Style
-- `grunt <server|serve|s>`: generates bundles, watches, and livereloads
-- `grunt build`: place bundled styles and scripts where `index.html` can find
-    them
-- `grunt deploy`: builds and deploys master branch
-
-
-## Additional Resources
-
-- [Modern Javascript Explained for Dinosaurs](https://medium.com/@peterxjang/modern-javascript-explained-for-dinosaurs-f695e9747b70)
-- [Making Sense of Front End Build Tools](https://medium.freecodecamp.org/making-sense-of-front-end-build-tools-3a1b3a87043b)
-
-## [License](LICENSE)
-
-1. All content is licensed under a CC­BY­NC­SA 4.0 license.
-1. All software code is licensed under GNU GPLv3. For commercial use or
-    alternative licensing, please contact legal@ga.co.
+- As a user I want to make a new account
+- As a user I want to sign in and sign out of my account
+- As a user I want to change my password
+- As a user I want to start a new game of tic-tac-toe
+- As a player I want to play the game without issues
+- As a user I want to keep track of my stats
+-

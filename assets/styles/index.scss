@@ -1,6 +1,6 @@
 @import '~bootstrap/scss/bootstrap';
 
-$alt-color: $black;
+$alt-color: #000000;
 $alt-background: #bb5050;
 $body-bg-color: #d0d8e0;
 $font-color: $light;
@@ -31,8 +31,8 @@ p {
 
 .box {
   align-items: center;
-  background-color: $secondary;
-  border: 1px solid $white;
+  background-color: #404040;
+  border: 1px solid $alt-color;
   color: $font-color;
   display: flex;
   height: 80px;
@@ -46,4 +46,9 @@ p {
 
 .sign-out {
   margin-top: 40px;
+}
+
+
+div {
+  max-width: 400px;
 }

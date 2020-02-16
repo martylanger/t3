@@ -12,8 +12,7 @@
   </head>
   <body>
     <h1>T3</h1>
-
-    <div class='container text-center phase3'> <!-- Text-center is superfluous right now-->
+    <div class='container text-center phase3'>
       <div class='row'>
         <div id='0' class='col-4 box'></div>
         <div id='1' class='col-4 box'></div>
@@ -29,13 +28,13 @@
 
     <p id='notice' class='phase3 text-center'></p>
 
-    <div class='container stats'> <!-- Text-center is superfluous right now-->
+    <div class='container stats'>
       <div class='row'>
-        <div id='stats1' class='col-12 box stats'></div>
-        <div id='stats2' class='col-12 box stats'></div>
-        <div id='stats3' class='col-12 box stats'></div>
-        <div id='stats4' class='col-12 box stats'></div>
-        <div id='stats5' class='col-12 box stats'></div>
+        <div id='number-of-games' class='col-12 box stats'></div>
+        <div id='number-of-wins' class='col-12 box stats'></div>
+        <div id='number-of-losses' class='col-12 box stats'></div>
+        <div id='number-of-draws' class='col-12 box stats'></div>
+        <div id='number-of-unfinished' class='col-12 box stats'></div>
       </div>
     </div>
 
@@ -44,13 +43,13 @@
     <form id='sign-in' class='border phase1 text-center'>
       <fieldset>
         <legend class='text-center'>Sign in!</legend>
-        <input type="text" name="credentials[email]" placeholder="Email">
+        <input type="text" name="credentials[email]" placeholder="Email"><br>
         <input type="password" name="credentials[password]" placeholder="Password"><br>
         <input type="submit" value="Sign in!">
       </fieldset>
     </form>
 
-    <form id="create-game" class="text-center border phase2 new-game">
+    <form id="create-game" class="text-center border phase2 phase3 new-game">
       <fieldset>
         <input type="submit" value="New game">
       </fieldset>
@@ -59,17 +58,17 @@
     <form id="sign-up" class="border text-center phase1">
       <fieldset>
         <legend>Not a member? Sign up!</legend>
-        <input type="text" name="credentials[email]" placeholder="Email">
-        <input type="password" name="credentials[password]" placeholder="Password">
+        <input type="text" name="credentials[email]" placeholder="Email"><br>
+        <input type="password" name="credentials[password]" placeholder="Password"><br>
         <input type="password" name="credentials[password_confirmation]" placeholder="Confirm Password"><br>
         <input type="submit" value="Sign up new user">
       </fieldset>
     </form>
 
-    <form id="change-password" class="text-center border phase2">
+    <form id="change-password" class="text-center border phase2 phase3">
       <fieldset>
         <legend>Change Password</legend>
-        <input type="password" name="passwords[old]" placeholder="Old Password">
+        <input type="password" name="passwords[old]" placeholder="Old Password"><br>
         <input type="password" name="passwords[new]" placeholder="New Password"><br>
         <input type="submit" value="Change Password!">
       </fieldset>
