@@ -45,7 +45,7 @@ I left README and style for last, and both are works in progress, as of these ke
 - Inspired by the projects of others, I would like to add the ability to view previous games.
 
 #### Wireframe:
-![wireframe](https://imgur.com/rHdwwyB)
+![wireframe](https://i.imgur.com/rHdwwyB.jpg)
 
 ### User Stories
 
