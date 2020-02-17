@@ -156,6 +156,7 @@ const clickCell = function (event) {
       $(`#${winLine[2]}`).addClass('win-line')
       $(`#${winLine[3]}`).addClass('win-line')
       $(`#${winLine[4]}`).addClass('win-line')
+      $(`#${winLine[5]}`).addClass('win-line')
       // return phase2 features and stats to the ui with updated stats
       $('#number-of-games').text(`Games: ${store.stats.numGames}`)
       $('#number-of-wins').text(`Wins: ${store.stats.winCount}`)
@@ -196,6 +197,7 @@ const onCreateGame = function (event) {
   $(`#${winLine[2]}`).removeClass('win-line')
   $(`#${winLine[3]}`).removeClass('win-line')
   $(`#${winLine[4]}`).removeClass('win-line')
+  $(`#${winLine[5]}`).removeClass('win-line')
   $('#number-of-wins').removeClass('win-line')
   $('#number-of-losses').removeClass('win-line')
   $('#number-of-draws').removeClass('win-line')
