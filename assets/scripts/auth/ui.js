@@ -11,7 +11,7 @@ const signUpSuccess = function (data) {
 
 const signUpFailure = function () {
   $('#auth-notice').text('Error on sign up')
-  $('#auth-notice').show()
+  $('#auth-notice').css('display', 'flex')
   $('form').trigger('reset')
 }
 
@@ -19,8 +19,8 @@ const signInSuccess = function (data) {
   $('#auth-notice').text('Signed in successfully')
   $('form').trigger('reset')
   $('.phase1').hide()
-  $('.phase2').show()
-  $('.stats').show()
+  $('.phase2').css('display', 'flex')
+  $('.stats').css('display', 'flex')
   store.user = data.user
 
   api.getStats(data)
@@ -30,7 +30,7 @@ const signInSuccess = function (data) {
 
 const signInFailure = function () {
   $('#auth-notice').text('Error on sign in')
-  $('#auth-notice').show()
+  $('#auth-notice').css('display', 'flex')
   $('form').trigger('reset')
 }
 
@@ -104,7 +104,7 @@ const signOutSuccess = function () {
   $('.phase2').hide()
   $('.stats').hide()
   $('.phase3').hide()
-  $('.phase1').show()
+  $('.phase1').css('display', 'flex')
   store.user = null
 }
 

@@ -159,8 +159,8 @@ const clickCell = function (event) {
       $('#number-of-draws').text(`Draws: ${store.stats.drawCount}`)
       $('#number-of-unfinished').text(`Unfinished: ${store.stats.unfinishedCount}`)
       $('#auth-notice').text('')
-      $('.phase2').show()
-      $('.stats').show()
+      $('.phase2').css('display', 'flex')
+      $('.stats').css('display', 'flex')
     }
   }
 }

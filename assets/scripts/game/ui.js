@@ -21,7 +21,7 @@ const onCreateSuccess = function (responseData) {
   $('#auth-notice').html('You started a new game!')
   $('.phase2').hide()
   $('.stats').hide()
-  $('.phase3').show()
+  $('.phase3').css('display', 'flex')
   $('div.box').text('')
 }
 
