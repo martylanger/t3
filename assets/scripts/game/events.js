@@ -17,6 +17,8 @@ require('./../app.js')
 // const store = require('./../store')
 }
 
+const stats = store.stats
+const game = store.game
 let xo = 'J'
 let position = 9
 let gameOn = false
@@ -57,8 +59,6 @@ const winCheck = function (board, xoxo) {
 
   // check all the win conditions to see if any has been met
   let boolean = false
-  // let i = 0
-  // while (!boolean && i < wins.length) {
   for (let i = 0; i < wins.length; i++) {
     boolean =
     board[wins[i][0]] === xoxo &&
@@ -74,11 +74,7 @@ const winCheck = function (board, xoxo) {
         return true
       }
     }
-    // i++
   }
-  // if (boolean) {
-  // winLine = wins[i - 1]
-  // return boolean
   return winLine.length > 0
 }
 
@@ -120,24 +116,24 @@ const isOver = function (board) {
 
 const clickCell = function (event) {
   // if user clicked an empty cell:
-  if (!$(event.target).text() && !store.game.over) {
+  if (!$(event.target).text() && !game.over) {
     // whose turn is it?
-    xo = store.game.cells.filter(cell => cell === '').length % 2 === 1 ? 'X' : 'O'
+    xo = game.cells.filter(cell => cell === '').length % 2 === 1 ? 'X' : 'O'
     // get position of click, 0-8
     position = event.target.id
     // insert xo into the chosen cell
     $(event.target).text(xo)
     // update game state locally
-    store.game.cells[position] = xo
+    game.cells[position] = xo
     // check if the game is over
-    if (isOver(store.game.cells)) {
-      const stats = store.stats
+    if (isOver(game.cells)) {
       // if it's over, set the local game.over value to true
-      store.game.over = true
+      game.over = true
       // and update the stats totals, display "game over" message, and change color of the appropriate stat box
       stats.numGames++
-      if (winCheck(store.game.cells)) {
-        const player = store.user.id === store.game.player_x.id ? 'X' : 'O'
+      if (winCheck(game.cells)) {
+        // Is user playing X or O?
+        const player = store.user.id === game.player_x.id ? 'X' : 'O'
         if (player === xo) {
           stats.winCount++
           $('#number-of-wins').addClass('win-line')
@@ -180,7 +176,7 @@ const onUpdateGame = function (event) {
         'index': position,
         'value': xo
       },
-      'over': store.game.over
+      'over': game.over
     }
   }
   api.update(thisGame)
@@ -190,7 +186,14 @@ const onUpdateGame = function (event) {
 
 const onCreateGame = function (event) {
   event.preventDefault()
+  // If you create a new game while there's already a game going,
+  if (gameOn === true) {
+    stats.unfinishedCount++
+  }
   gameOn = true
+  for (let i = 0; i < 6; i++) {
+    $(`#${winLine[i]}`).removeClass('win-line')
+  }
   $(`#${winLine[0]}`).removeClass('win-line')
   $(`#${winLine[1]}`).removeClass('win-line')
   $(`#${winLine[2]}`).removeClass('win-line')
