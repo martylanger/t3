@@ -9,8 +9,8 @@ const signUpSuccess = function (data) {
   $('form').trigger('reset')
 }
 
-const signUpFailure = function (error) {
-  $('#auth-notice').text('Error on sign up: ' + error)
+const signUpFailure = function () {
+  $('#auth-notice').text('Error on sign up')
   $('#auth-notice').show()
   $('form').trigger('reset')
 }
@@ -28,8 +28,8 @@ const signInSuccess = function (data) {
     .catch(getStatsFailure)
 }
 
-const signInFailure = function (error) {
-  $('#auth-notice').text('Error on sign in: ' + error)
+const signInFailure = function () {
+  $('#auth-notice').text('Error on sign in')
   $('#auth-notice').show()
   $('form').trigger('reset')
 }
@@ -38,7 +38,7 @@ const whoWon = function (game) {
   const user = store.user.id
   let winner = 1
   const player = user === game.player_x.id ? 'X' : 'O'
-  let outcome = 'loss'
+  let outcome = 'dummy'
 
   if (gameEvents.winCheck(game.cells, 'X')) {
     winner = 'X'
@@ -47,9 +47,11 @@ const whoWon = function (game) {
   }
 
   if (winner === 1) {
-    outcome = gameEvents.drawCheck(game.cells) ? 'draw' : 'incomplete'
+    outcome = gameEvents.drawCheck(game.cells) ? 'draw' : 'unfinished'
   } else if (winner === player) {
     outcome = 'win'
+  } else {
+    outcome = 'loss'
   }
   return outcome
 }
@@ -59,7 +61,7 @@ const getStatsSuccess = function (data) {
   let winCount = 0
   let lossCount = 0
   let drawCount = 0
-  let incompleteCount = 0
+  let unfinishedCount = 0
   for (let i = 0; i < data.games.length; i++) {
     const game = data.games[i]
     switch (whoWon(game)) {
@@ -72,8 +74,8 @@ const getStatsSuccess = function (data) {
       case 'draw':
         drawCount++
         break
-      case 'incomplete':
-        incompleteCount++
+      case 'unfinished':
+        unfinishedCount++
     }
   }
   store.stats = {}
@@ -82,17 +84,17 @@ const getStatsSuccess = function (data) {
   store.stats.winCount = winCount
   store.stats.lossCount = lossCount
   store.stats.drawCount = drawCount
-  store.stats.incompleteCount = incompleteCount
+  store.stats.unfinishedCount = unfinishedCount
 
   $('#number-of-games').html(`Games: ${gameCount}`)
   $('#number-of-wins').html(`Wins: ${winCount}`)
   $('#number-of-losses').html(`Losses: ${lossCount}`)
   $('#number-of-draws').html(`Draws: ${drawCount}`)
-  $('#number-of-incomplete').html(`Incomplete: ${incompleteCount}`)
+  $('#number-of-unfinished').html(`Unfinished: ${unfinishedCount}`)
 }
 
-const getStatsFailure = function (error) {
-  console.error('running getStatsFailure. Error is :', error)
+const getStatsFailure = function () {
+  $('#auth-notice').text('Error on stats retrieval')
   $('form').trigger('reset')
 }
 
@@ -106,10 +108,9 @@ const signOutSuccess = function () {
   store.user = null
 }
 
-const signOutFailure = function (error) {
+const signOutFailure = function () {
   $('#auth-notice').text('Error on sign out')
   $('form').trigger('reset')
-  console.error('signOutFailure ran. Error is :', error)
 }
 
 const changePasswordSuccess = function () {
@@ -117,10 +118,9 @@ const changePasswordSuccess = function () {
   $('form').trigger('reset')
 }
 
-const changePasswordFailure = function (error) {
+const changePasswordFailure = function () {
   $('#auth-notice').text('Error on change password')
   $('form').trigger('reset')
-  console.error('changePasswordFailure ran. Error is :', error)
 }
 
 module.exports = {

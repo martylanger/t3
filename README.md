@@ -1,7 +1,7 @@
 
 # T3
 
-T3 allows users on the same physical device to play tic-tac-toe against one another, or a single player to play against themself. The primary user has an account - with a user name and password - that keeps track of their total number of games played, games won, games lost, games drawn, and incomplete games.
+T3 allows users on the same physical device to play tic-tac-toe against one another, or a single player to play against themself. The primary user has an account - with a user name and password - that keeps track of their total number of games played, games won, games lost, games drawn, and unfinished games.
 
 My primary aim for this project was to make as solid a product as I could rather than to be overly ambitious with the addition of features. After meeting the basic requirements, I generally added styles and functionalities where they most naturally seemed called-for, always with the idea of adding to the basic product rather than overhauling my existing code.
 
@@ -37,7 +37,7 @@ I left README and style for last, and both are works in progress, as of these ke
 - I still need to fix the sizing and alignment of the elements on my page, and before and after games I would like to have the auth actions on one side of the page and the "quick play" button (before sign-in) or stats (when signed in), as planned in my wireframe.
 - In addition to overhauling my layout, I need to add many other style elements to my game, which currently has a very barebones interface. At the least, I would like to restyle the board, the X's and O's, and the messages to the user.
 - I would like to add a "quick play" capability, which would use dummy credentials to communicate with the API and wouldn't display stats.
-- I would like to add the ability to restart an incomplete game - this is a feature that I didn't have time to implement, but that I designed my game to support. (In particular, I chose to determine whose turn it is not by having a variable switch between X and O from the start of the game, but rather by deducing it from the game state.)
+- I would like to add the ability to restart an unfinished game - this is a feature that I didn't have time to implement, but that I designed my game to support. (In particular, I chose to determine whose turn it is not by having a variable switch between X and O from the start of the game, but rather by deducing it from the game state.)
 - I would like to change my "New Game" and "Sign Out" elements in the HTML to "button" inputs instead of "submit" inputs.
 - I would like to randomize whether the primary user is X or O each game - or else to let the primary user choose whether they play as X or O.
 - I still would like to add the ability to play with another user remotely, as I designed some parts of my code to support that functionality.

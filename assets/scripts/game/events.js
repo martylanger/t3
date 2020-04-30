@@ -17,7 +17,6 @@ require('./../app.js')
 // const store = require('./../store')
 }
 
-const stats = store.stats
 let xo = 'J'
 let position = 9
 let gameOn = false
@@ -130,21 +129,21 @@ const clickCell = function (event) {
       // if it's over, set the local game.over value to true
       store.game.over = true
       // and update the stats totals, display "game over" message, and change color of the appropriate stat box
-      stats.gameCount++
+      store.stats.gameCount++
       if (winCheck(store.game.cells)) {
         // Is user playing X or O?
         const player = store.user.id === store.game.player_x.id ? 'X' : 'O'
         // xo made the last move, so if winCheck is true, xo won
         if (player === xo) {
-          stats.winCount++
+          store.stats.winCount++
           $('#number-of-wins').addClass('win-line')
         } else {
-          stats.lossCount++
+          store.stats.lossCount++
           $('#number-of-losses').addClass('win-line')
         }
         $('#notice').text('Game over. ' + xo + ' wins!')
       } else {
-        stats.drawCount++
+        store.stats.drawCount++
         $('#notice').text('Game over. Nobody wins!')
         $('#number-of-draws').addClass('win-line')
       }
@@ -154,11 +153,11 @@ const clickCell = function (event) {
       }
 
       // return phase2 features and stats to the ui with updated stats
-      $('#number-of-games').text(`Games: ${stats.gameCount}`)
-      $('#number-of-wins').text(`Wins: ${stats.winCount}`)
-      $('#number-of-losses').text(`Losses: ${stats.lossCount}`)
-      $('#number-of-draws').text(`Draws: ${stats.drawCount}`)
-      $('#number-of-unfinished').text(`Unfinished: ${stats.unfinishedCount}`)
+      $('#number-of-games').text(`Games: ${store.stats.gameCount}`)
+      $('#number-of-wins').text(`Wins: ${store.stats.winCount}`)
+      $('#number-of-losses').text(`Losses: ${store.stats.lossCount}`)
+      $('#number-of-draws').text(`Draws: ${store.stats.drawCount}`)
+      $('#number-of-unfinished').text(`Unfinished: ${store.stats.unfinishedCount}`)
       $('#auth-notice').text('')
       $('.phase2').show()
       $('.stats').show()
@@ -188,8 +187,8 @@ const onUpdateGame = function (event) {
 const onCreateGame = function (event) {
   event.preventDefault()
   // If you create a new game while there's already a game going, add to unfinishedCount
-  if (gameOn === true) {
-    stats.unfinishedCount++
+  if (!store.game.over) {
+    store.stats.unfinishedCount++
   }
 
   gameOn = true
