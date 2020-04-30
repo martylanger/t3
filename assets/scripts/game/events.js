@@ -133,7 +133,7 @@ const clickCell = function (event) {
     if (isOver(store.game.cells)) {
       // if it's over, set the local game.over value to true
       store.game.over = true
-      // update the stats totals and display "game over" message
+      // and update the stats totals, display "game over" message, and change color of the appropriate stat box
       store.stats.numGames++
       if (winCheck(store.game.cells)) {
         const player = store.user.id === store.game.player_x.id ? 'X' : 'O'
@@ -146,17 +146,15 @@ const clickCell = function (event) {
         }
         $('#notice').text('Game over. ' + xo + ' wins!')
       } else {
-        $('#notice').text('Game over. Nobody wins!')
         store.stats.drawCount++
+        $('#notice').text('Game over. Nobody wins!')
         $('#number-of-draws').addClass('win-line')
       }
       // mark the winning boxes with class 'win-line'
-      $(`#${winLine[0]}`).addClass('win-line')
-      $(`#${winLine[1]}`).addClass('win-line')
-      $(`#${winLine[2]}`).addClass('win-line')
-      $(`#${winLine[3]}`).addClass('win-line')
-      $(`#${winLine[4]}`).addClass('win-line')
-      $(`#${winLine[5]}`).addClass('win-line')
+      for (let i = 0; i < 6; i++) {
+        $(`#${winLine[i]}`).addClass('win-line')
+      }
+
       // return phase2 features and stats to the ui with updated stats
       $('#number-of-games').text(`Games: ${store.stats.numGames}`)
       $('#number-of-wins').text(`Wins: ${store.stats.winCount}`)

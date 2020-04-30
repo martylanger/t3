@@ -3,6 +3,7 @@
 $alt-color: #000000;
 $alt-background: #bb5050;
 $body-bg-color: #d0d8e0;
+$box-bg-color: #404040;
 $font-color: $light;
 
 body {
@@ -31,7 +32,7 @@ p {
 
 .box {
   align-items: center;
-  background-color: #404040;
+  background-color: $box-bg-color;
   border: 1px solid $alt-color;
   color: $font-color;
   display: flex;
