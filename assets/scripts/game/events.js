@@ -131,22 +131,23 @@ const clickCell = function (event) {
     store.game.cells[position] = xo
     // check if the game is over
     if (isOver(store.game.cells)) {
+      const stats = store.stats
       // if it's over, set the local game.over value to true
       store.game.over = true
       // and update the stats totals, display "game over" message, and change color of the appropriate stat box
-      store.stats.numGames++
+      stats.numGames++
       if (winCheck(store.game.cells)) {
         const player = store.user.id === store.game.player_x.id ? 'X' : 'O'
         if (player === xo) {
-          store.stats.winCount++
+          stats.winCount++
           $('#number-of-wins').addClass('win-line')
         } else {
-          store.stats.lossCount++
+          stats.lossCount++
           $('#number-of-losses').addClass('win-line')
         }
         $('#notice').text('Game over. ' + xo + ' wins!')
       } else {
-        store.stats.drawCount++
+        stats.drawCount++
         $('#notice').text('Game over. Nobody wins!')
         $('#number-of-draws').addClass('win-line')
       }
@@ -156,11 +157,11 @@ const clickCell = function (event) {
       }
 
       // return phase2 features and stats to the ui with updated stats
-      $('#number-of-games').text(`Games: ${store.stats.numGames}`)
-      $('#number-of-wins').text(`Wins: ${store.stats.winCount}`)
-      $('#number-of-losses').text(`Losses: ${store.stats.lossCount}`)
-      $('#number-of-draws').text(`Draws: ${store.stats.drawCount}`)
-      $('#number-of-unfinished').text(`Unfinished: ${store.stats.unfinishedCount}`)
+      $('#number-of-games').text(`Games: ${stats.numGames}`)
+      $('#number-of-wins').text(`Wins: ${stats.winCount}`)
+      $('#number-of-losses').text(`Losses: ${stats.lossCount}`)
+      $('#number-of-draws').text(`Draws: ${stats.drawCount}`)
+      $('#number-of-unfinished').text(`Unfinished: ${stats.unfinishedCount}`)
       $('#auth-notice').text('')
       $('.phase2').show()
       $('.stats').show()
