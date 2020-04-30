@@ -175,12 +175,12 @@ const onUpdateGame = function (event) {
   clickCell(event)
   // create a javascript object from clickCell info
   const thisGame = {
-    "game": {
-      "cell": {
-        "index": position,
-        "value": xo
+    'game': {
+      'cell': {
+        'index': position,
+        'value': xo
       },
-      "over": store.game.over
+      'over': store.game.over
     }
   }
   api.update(thisGame)
