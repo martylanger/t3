@@ -20,6 +20,9 @@ require('./../app.js')
 let xo = 'J'
 let position = 9
 let gameOn = false
+store.game = {
+  over: true
+}
 
 {
 // collpase me! I'm vestigial!
