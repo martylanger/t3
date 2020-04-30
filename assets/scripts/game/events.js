@@ -18,7 +18,6 @@ require('./../app.js')
 }
 
 const stats = store.stats
-const game = store.game
 let xo = 'J'
 let position = 9
 let gameOn = false
@@ -45,6 +44,7 @@ let gameOn = false
 let winLine = []
 
 const winCheck = function (board, xoxo) {
+  console.log('running winCheck')
   // enumerate the win conditions
   const wins = [
     [0, 1, 2],
@@ -116,24 +116,25 @@ const isOver = function (board) {
 
 const clickCell = function (event) {
   // if user clicked an empty cell:
-  if (!$(event.target).text() && !game.over) {
+  if (!$(event.target).text() && !store.game.over) {
     // whose turn is it?
-    xo = game.cells.filter(cell => cell === '').length % 2 === 1 ? 'X' : 'O'
+    xo = store.game.cells.filter(cell => cell === '').length % 2 === 1 ? 'X' : 'O'
     // get position of click, 0-8
     position = event.target.id
     // insert xo into the chosen cell
     $(event.target).text(xo)
     // update game state locally
-    game.cells[position] = xo
+    store.game.cells[position] = xo
     // check if the game is over
-    if (isOver(game.cells)) {
+    if (isOver(store.game.cells)) {
       // if it's over, set the local game.over value to true
-      game.over = true
+      store.game.over = true
       // and update the stats totals, display "game over" message, and change color of the appropriate stat box
-      stats.numGames++
-      if (winCheck(game.cells)) {
+      stats.gameCount++
+      if (winCheck(store.game.cells)) {
         // Is user playing X or O?
-        const player = store.user.id === game.player_x.id ? 'X' : 'O'
+        const player = store.user.id === store.game.player_x.id ? 'X' : 'O'
+        // xo made the last move, so if winCheck is true, xo won
         if (player === xo) {
           stats.winCount++
           $('#number-of-wins').addClass('win-line')
@@ -153,7 +154,7 @@ const clickCell = function (event) {
       }
 
       // return phase2 features and stats to the ui with updated stats
-      $('#number-of-games').text(`Games: ${stats.numGames}`)
+      $('#number-of-games').text(`Games: ${stats.gameCount}`)
       $('#number-of-wins').text(`Wins: ${stats.winCount}`)
       $('#number-of-losses').text(`Losses: ${stats.lossCount}`)
       $('#number-of-draws').text(`Draws: ${stats.drawCount}`)
@@ -176,7 +177,7 @@ const onUpdateGame = function (event) {
         'index': position,
         'value': xo
       },
-      'over': game.over
+      'over': store.game.over
     }
   }
   api.update(thisGame)
@@ -186,23 +187,25 @@ const onUpdateGame = function (event) {
 
 const onCreateGame = function (event) {
   event.preventDefault()
-  // If you create a new game while there's already a game going,
+  // If you create a new game while there's already a game going, add to unfinishedCount
   if (gameOn === true) {
     stats.unfinishedCount++
   }
+
   gameOn = true
-  for (let i = 0; i < 6; i++) {
+  winLine.push('number-of-wins', 'number-of-losses', 'number-of-draws')
+  for (let i = 0; i < 9; i++) {
     $(`#${winLine[i]}`).removeClass('win-line')
   }
-  $(`#${winLine[0]}`).removeClass('win-line')
-  $(`#${winLine[1]}`).removeClass('win-line')
-  $(`#${winLine[2]}`).removeClass('win-line')
-  $(`#${winLine[3]}`).removeClass('win-line')
-  $(`#${winLine[4]}`).removeClass('win-line')
-  $(`#${winLine[5]}`).removeClass('win-line')
-  $('#number-of-wins').removeClass('win-line')
-  $('#number-of-losses').removeClass('win-line')
-  $('#number-of-draws').removeClass('win-line')
+  // $(`#${winLine[0]}`).removeClass('win-line')
+  // $(`#${winLine[1]}`).removeClass('win-line')
+  // $(`#${winLine[2]}`).removeClass('win-line')
+  // $(`#${winLine[3]}`).removeClass('win-line')
+  // $(`#${winLine[4]}`).removeClass('win-line')
+  // $(`#${winLine[5]}`).removeClass('win-line')
+  // $('#number-of-wins').removeClass('win-line')
+  // $('#number-of-losses').removeClass('win-line')
+  // $('#number-of-draws').removeClass('win-line')
 
   winLine = []
 

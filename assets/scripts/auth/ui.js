@@ -47,7 +47,7 @@ const whoWon = function (game) {
   }
 
   if (winner === 1) {
-    outcome = gameEvents.drawCheck(game.cells) ? 'draw' : 'unfinished'
+    outcome = gameEvents.drawCheck(game.cells) ? 'draw' : 'incomplete'
   } else if (winner === player) {
     outcome = 'win'
   }
@@ -55,11 +55,11 @@ const whoWon = function (game) {
 }
 
 const getStatsSuccess = function (data) {
-  const numGames = data.games.length
+  const gameCount = data.games.length
   let winCount = 0
   let lossCount = 0
   let drawCount = 0
-  let unfinishedCount = 0
+  let incompleteCount = 0
   for (let i = 0; i < data.games.length; i++) {
     const game = data.games[i]
     switch (whoWon(game)) {
@@ -72,23 +72,23 @@ const getStatsSuccess = function (data) {
       case 'draw':
         drawCount++
         break
-      case 'unfinished':
-        unfinishedCount++
+      case 'incomplete':
+        incompleteCount++
     }
   }
   store.stats = {}
   store.stats.games = data.games
-  store.stats.numGames = numGames
+  store.stats.gameCount = gameCount
   store.stats.winCount = winCount
   store.stats.lossCount = lossCount
   store.stats.drawCount = drawCount
-  store.stats.unfinishedCount = unfinishedCount
+  store.stats.incompleteCount = incompleteCount
 
-  $('#number-of-games').html(`Games: ${numGames}`)
+  $('#number-of-games').html(`Games: ${gameCount}`)
   $('#number-of-wins').html(`Wins: ${winCount}`)
   $('#number-of-losses').html(`Losses: ${lossCount}`)
   $('#number-of-draws').html(`Draws: ${drawCount}`)
-  $('#number-of-unfinished').html(`Unfinished: ${unfinishedCount}`)
+  $('#number-of-incomplete').html(`Incomplete: ${incompleteCount}`)
 }
 
 const getStatsFailure = function (error) {
