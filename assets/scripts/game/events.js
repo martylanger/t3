@@ -196,15 +196,6 @@ const onCreateGame = function (event) {
   for (let i = 0; i < 9; i++) {
     $(`#${winLine[i]}`).removeClass('win-line')
   }
-  // $(`#${winLine[0]}`).removeClass('win-line')
-  // $(`#${winLine[1]}`).removeClass('win-line')
-  // $(`#${winLine[2]}`).removeClass('win-line')
-  // $(`#${winLine[3]}`).removeClass('win-line')
-  // $(`#${winLine[4]}`).removeClass('win-line')
-  // $(`#${winLine[5]}`).removeClass('win-line')
-  // $('#number-of-wins').removeClass('win-line')
-  // $('#number-of-losses').removeClass('win-line')
-  // $('#number-of-draws').removeClass('win-line')
 
   winLine = []
 
