@@ -2,6 +2,7 @@
 
 $alt-color: #000000;
 $alt-background: #bb5050;
+$alt-background-2: #c0c8d0;
 $body-bg-color: #d0d8e0;
 $box-bg-color: #404040;
 $font-color: $light;
@@ -20,8 +21,7 @@ form {
 }
 
 p {
-  margin: 20px auto 0;
-  padding: 3px;
+  margin: 20px;
 }
 
 .container {
@@ -67,12 +67,9 @@ div {
   max-width: 400px;
 }
 
-.invisible {
-  color: $body-bg-color;
-}
-
 .head {
   align-items: center;
+  background-color: $alt-background-2;
   flex-direction: row;
   justify-content: space-between;
 }
