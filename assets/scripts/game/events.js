@@ -163,6 +163,9 @@ const clickCell = function (event) {
       $('#auth-notice').text('')
       $('.phase2').css('display', 'flex')
       $('.stats').css('display', 'flex')
+
+      winLine = []
+      gameOn = false
     }
   }
 }

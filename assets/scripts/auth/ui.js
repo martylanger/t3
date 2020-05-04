@@ -103,8 +103,10 @@ const signOutSuccess = function () {
   $('form').trigger('reset')
   $('.phase2').hide()
   $('.stats').hide()
+  $('.stats').removeClass('win-line')
   $('.phase3').hide()
   $('.phase1').css('display', 'flex')
+
   store.user = null
 }
 
