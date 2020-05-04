@@ -29,10 +29,7 @@ p {
   justify-content: center;
 }
 
-.phase2 {
-  display: none;
-}
-
+.phase2,
 .phase3 {
   display: none;
 }
@@ -75,6 +72,6 @@ div {
   margin-bottom: 20px;
 }
 
-.sub-head {
+.head > div {
   width: 100px;
 }
