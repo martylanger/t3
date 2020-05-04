@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>T3</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <!-- Do not add `link` tags-->
+    <link rel='shortcut icon' type='image/x-icon' href='favicon.ico'>
+    <!-- Do not add `script` tags-->
+    <script src='public/vendor.js' type='text/javascript' charset='utf-8' defer></script>
+    <script src='public/application.js' type='text/javascript' charset='utf-8' defer></script>
+  </head>
+  <body>
+
+    <header class='container head'>
+
+          <div>
+            <h1>T3</h1>
+          </div>
+
+          <div>
+            <form id='create-game' class='text-center phase2 phase3 new-game'>
+              <fieldset>
+                <input type='submit' value='New game'>
+              </fieldset>
+            </form>
+          </div>
+
+          <div>
+            <form id='sign-out' class='phase2 phase3 text-center sign-out'>
+              <fieldset>
+                <input type='submit' value='Sign out'>
+              </fieldset>
+            </form>
+          </div>
+
+    </header>
+
+    <div class='container text-center phase3'>
+      <div class='row'>
+        <div id='0' class='col-4 box'></div>
+        <div id='1' class='col-4 box'></div>
+        <div id='2' class='col-4 box'></div>
+        <div id='3' class='col-4 box'></div>
+        <div id='4' class='col-4 box'></div>
+        <div id='5' class='col-4 box'></div>
+        <div id='6' class='col-4 box'></div>
+        <div id='7' class='col-4 box'></div>
+        <div id='8' class='col-4 box'></div>
+      </div>
+    </div>
+
+    <div class='container'>
+      <div class='row'>
+        <p id='notice' class='col-12 phase3 text-center'></p>
+      </div>
+    </div>
+
+    <div class='container stats-container'>
+      <div class='row'>
+        <div id='number-of-games' class='col-12 box stats'></div>
+        <div id='number-of-wins' class='col-12 box stats'></div>
+        <div id='number-of-losses' class='col-12 box stats'></div>
+        <div id='number-of-draws' class='col-12 box stats'></div>
+        <div id='number-of-unfinished' class='col-12 box stats'></div>
+      </div>
+    </div>
+
+    <div class='container'>
+      <div class='row'>
+        <p id='auth-notice' class='text-center phase1 phase2'></p>
+      </div>
+    </div>
+
+    <div class='container'>
+      <div class='row'>
+        <form id='sign-in' class='border phase1 text-center'>
+          <fieldset>
+            <legend class='text-center'>Sign in!</legend>
+            <input type='text' name='credentials[email]' placeholder='Email'><br>
+            <input type='password' name='credentials[password]' placeholder='Password'><br>
+            <input type='submit' value='Sign in!'>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+
+    <div class='container'>
+      <div class='row'>
+        <form id='sign-up' class='border phase1 text-center'>
+          <fieldset>
+            <legend>Not a member? Sign up!</legend>
+            <input type='text' name='credentials[email]' placeholder='Email'><br>
+            <input type='password' name='credentials[password]' placeholder='Password'><br>
+            <input type='password' name='credentials[password_confirmation]' placeholder='Confirm Password'><br>
+            <input type='submit' value='Sign up new user'>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+
+    <div class='container'>
+      <div class='row'>
+        <form id='change-password' class='text-center border phase2 phase3'>
+          <fieldset>
+            <legend>Change Password</legend>
+            <input type='password' name='passwords[old]' placeholder='Old Password'><br>
+            <input type='password' name='passwords[new]' placeholder='New Password'><br>
+            <input type='submit' value='Change Password!'>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+
+  </body>
+</html>
