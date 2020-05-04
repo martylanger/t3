@@ -110,6 +110,7 @@ const isOver = function (board) {
   if (winCheck(board, xo)) {
     return true
   } else if (drawCheck(board)) {
+    console.log("drawcheck true")
     return true
   } else {
     return false
