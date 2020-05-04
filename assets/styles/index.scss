@@ -8,27 +8,29 @@ $font-color: $light;
 
 body {
   background-color: $body-bg-color;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 form {
   display: flex;
   justify-content: center;
+  margin: auto 0;
 }
 
 p {
-  margin: 3px;
-  padding: 3px auto;
+  margin: 20px auto 0;
+  padding: 3px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
 }
 
 .phase2 {
   display: none;
-}
-
-.stats {
-  border: 0;
-  display: none;
-  height: auto;
-  padding: 0;
 }
 
 .phase3 {
@@ -43,6 +45,17 @@ p {
   display: flex;
   height: 80px;
   justify-content: center;
+  width: 80px;
+}
+
+.stats {
+  display: none;
+  height: 80px;
+  padding: 0;
+}
+
+.stats-container {
+  width: 240px;
 }
 
 .win-line {
@@ -50,10 +63,20 @@ p {
   color: $alt-color;
 }
 
-.sign-out {
-  margin-top: 40px;
-}
-
 div {
   max-width: 400px;
+}
+
+.invisible {
+  color: $body-bg-color;
+}
+
+.head {
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.sub-head {
+  width: 100px;
 }

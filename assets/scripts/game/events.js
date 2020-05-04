@@ -20,6 +20,9 @@ require('./../app.js')
 let xo = 'J'
 let position = 9
 let gameOn = false
+store.game = {
+  over: true
+}
 
 {
 // collpase me! I'm vestigial!
@@ -43,7 +46,6 @@ let gameOn = false
 let winLine = []
 
 const winCheck = function (board, xoxo) {
-  console.log('running winCheck')
   // enumerate the win conditions
   const wins = [
     [0, 1, 2],
@@ -189,6 +191,7 @@ const onCreateGame = function (event) {
   // If you create a new game while there's already a game going, add to unfinishedCount
   if (!store.game.over) {
     store.stats.unfinishedCount++
+    store.stats.gameCount++
   }
 
   gameOn = true
