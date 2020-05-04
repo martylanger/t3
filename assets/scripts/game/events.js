@@ -42,11 +42,9 @@ store.game = {
 //   xo = response.cells.filter(cell => cell === "").length % 2 === 1 ? 'X' : 'O'
 // }
 }
-winLine = []
-let winLine = []
+store.winLine = []
 
 const winCheck = function (board, xoxo) {
-  winLine = []
   // enumerate the win conditions
   const wins = [
     [0, 1, 2],
@@ -60,24 +58,27 @@ const winCheck = function (board, xoxo) {
   ]
 
   // check all the win conditions to see if any has been met
-  let boolean = false
+  let match = false
   for (let i = 0; i < wins.length; i++) {
-    boolean =
+    // for each win condition, do all three boxes === xoxo?
+    match =
     board[wins[i][0]] === xoxo &&
     board[wins[i][1]] === xoxo &&
     board[wins[i][2]] === xoxo
-    if (boolean) {
+    // if a win condition has been met
+    if (match) {
+      // and it's during a game
       if (gameOn) {
-        winLine.push(wins[i][0])
-        winLine.push(wins[i][1])
-        winLine.push(wins[i][2])
-        boolean = false
+        // then add the winning boxes to winLine
+        store.winLine.push(wins[i][0])
+        store.winLine.push(wins[i][1])
+        store.winLine.push(wins[i][2])
       } else {
         return true
       }
     }
   }
-  return winLine.length > 0
+  return store.winLine.length > 0
 }
 
 {
@@ -110,7 +111,6 @@ const isOver = function (board) {
   if (winCheck(board, xo)) {
     return true
   } else if (drawCheck(board)) {
-    console.log("drawcheck true")
     return true
   } else {
     return false
@@ -138,6 +138,7 @@ const clickCell = function (event) {
         // Is user playing X or O?
         const player = store.user.id === store.game.player_x.id ? 'X' : 'O'
         // xo made the last move, so if winCheck is true, xo won
+        // the only question is whether the user was xo or not
         if (player === xo) {
           store.stats.winCount++
           $('#number-of-wins').addClass('win-line')
@@ -153,7 +154,7 @@ const clickCell = function (event) {
       }
       // mark the winning boxes with class 'win-line'
       for (let i = 0; i < 6; i++) {
-        $(`#${winLine[i]}`).addClass('win-line')
+        $(`#${store.winLine[i]}`).addClass('win-line')
       }
 
       // return phase2 features and stats to the ui with updated stats
@@ -198,13 +199,10 @@ const onCreateGame = function (event) {
     store.stats.gameCount++
   }
 
+  // Get rid of the highlights
   gameOn = true
-  winLine.push('number-of-wins', 'number-of-losses', 'number-of-draws')
-  for (let i = 0; i < 9; i++) {
-    $(`#${winLine[i]}`).removeClass('win-line')
-  }
-
-  winLine = []
+  $('.box').removeClass('win-line')
+  store.winLine = []
 
   api.create()
     .then(ui.onCreateSuccess)

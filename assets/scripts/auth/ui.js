@@ -123,6 +123,7 @@ const signOutSuccess = function () {
 
   store.user = null
   store.stats = null
+  store.winLine = []
 }
 
 const signOutFailure = function () {
