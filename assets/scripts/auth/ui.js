@@ -37,9 +37,18 @@ const signInFailure = function () {
 const whoWon = function (game) {
   const user = store.user.id
   let winner = 1
-  const player = user === game.player_x.id ? 'X' : 'O'
-  let outcome = 'dummy'
+  let player = ''
+  let outcome = ''
 
+  // Was the user X or O?
+  if (user === game.player_x.id) {
+    player = 'X'
+  } else {
+    player = 'O'
+  }
+  // const player = user === game.player_x.id ? 'X' : 'O'
+
+  // Who won?
   if (gameEvents.winCheck(game.cells, 'X')) {
     winner = 'X'
   } else if (gameEvents.winCheck(game.cells, 'O')) {
@@ -62,6 +71,8 @@ const getStatsSuccess = function (data) {
   let lossCount = 0
   let drawCount = 0
   let unfinishedCount = 0
+
+  // Tally the stats
   for (let i = 0; i < data.games.length; i++) {
     const game = data.games[i]
     switch (whoWon(game)) {
@@ -78,6 +89,8 @@ const getStatsSuccess = function (data) {
         unfinishedCount++
     }
   }
+
+  // Store the stats for fast updates
   store.stats = {}
   store.stats.games = data.games
   store.stats.gameCount = gameCount
@@ -86,6 +99,7 @@ const getStatsSuccess = function (data) {
   store.stats.drawCount = drawCount
   store.stats.unfinishedCount = unfinishedCount
 
+  // Display the stats
   $('#number-of-games').html(`Games: ${gameCount}`)
   $('#number-of-wins').html(`Wins: ${winCount}`)
   $('#number-of-losses').html(`Losses: ${lossCount}`)
@@ -103,11 +117,12 @@ const signOutSuccess = function () {
   $('form').trigger('reset')
   $('.phase2').hide()
   $('.stats').hide()
-  $('.stats').removeClass('win-line')
+  $('.box').removeClass('win-line')
   $('.phase3').hide()
   $('.phase1').css('display', 'flex')
 
   store.user = null
+  store.stats = null
 }
 
 const signOutFailure = function () {

@@ -42,10 +42,11 @@ store.game = {
 //   xo = response.cells.filter(cell => cell === "").length % 2 === 1 ? 'X' : 'O'
 // }
 }
-
+winLine = []
 let winLine = []
 
 const winCheck = function (board, xoxo) {
+  winLine = []
   // enumerate the win conditions
   const wins = [
     [0, 1, 2],
@@ -164,7 +165,6 @@ const clickCell = function (event) {
       $('.phase2').css('display', 'flex')
       $('.stats').css('display', 'flex')
 
-      winLine = []
       gameOn = false
     }
   }
